@@ -1,4 +1,5 @@
 
+---
 **Languages:**
 
 <img align="left" height="25" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/kotlin/kotlin.png">
@@ -21,6 +22,7 @@
 <img align="left" height="25" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/terminal/terminal.png">
 
 <br />
-<br />
+
+---
 
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=husker-dev&hide=ruby&layout=compact&theme=dark&bg_color=0D1117&border_color=30363D)](https://github.com/husker-dev)
