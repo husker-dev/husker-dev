@@ -18,6 +18,7 @@
 <img align="left" height="25" src="https://upload.wikimedia.org/wikipedia/commons/9/9c/IntelliJ_IDEA_Icon.svg">
 <img align="left" height="25" src="https://cdn.worldvectorlogo.com/logos/clion-1.svg">
 <img align="left" height="25" src="https://www.pngfind.com/pngs/b/642-6424738_rider-png.png">
+<img align="left" height="25" src="https://upload.wikimedia.org/wikipedia/commons/1/1d/PyCharm_Icon.svg">
 <img align="left" height="25" src="https://upload.wikimedia.org/wikipedia/commons/5/59/Visual_Studio_Icon_2019.svg">
 <img align="left" height="25" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/terminal/terminal.png">
 
