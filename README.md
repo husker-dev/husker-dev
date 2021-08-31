@@ -28,10 +28,4 @@
   
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=husker-dev&hide=ruby&layout=compact&theme=dark&bg_color=0D1117&border_color=30363D)](https://github.com/husker-dev)
   
-<!--START_SECTION:activity-->
-1. 🎉 Merged PR [#3](https://github.com/husker-dev/openglfx/pull/3) in [husker-dev/openglfx](https://github.com/husker-dev/openglfx)
-2. 💪 Opened PR [#3](https://github.com/husker-dev/openglfx/pull/3) in [husker-dev/openglfx](https://github.com/husker-dev/openglfx)
-3. ❗️ Closed issue [#1](https://github.com/husker-dev/openglfx/issues/1) in [husker-dev/openglfx](https://github.com/husker-dev/openglfx)
-4. 🗣 Commented on [#1](https://github.com/husker-dev/openglfx/issues/1) in [husker-dev/openglfx](https://github.com/husker-dev/openglfx)
-5. ❗️ Closed issue [#2](https://github.com/husker-dev/openglfx/issues/2) in [husker-dev/openglfx](https://github.com/husker-dev/openglfx)
-<!--END_SECTION:activity-->
+<!-- START gadpp -->
