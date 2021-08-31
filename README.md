@@ -25,8 +25,7 @@
 <br />
 <br />
 <br />
-
-<d>
+  
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=husker-dev&hide=ruby&layout=compact&theme=dark&bg_color=0D1117&border_color=30363D)](https://github.com/husker-dev)
-<!--START_SECTION:activity-->  
-</d>
+  
+<!--START_SECTION:activity-->
