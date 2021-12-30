@@ -98,7 +98,7 @@
 			// If current page in URL is correct, then do nothing (for prev/next page)
 			let searchParams = new URLSearchParams(window.location.search);
 			if(!searchParams.has('page') || searchParams.get('page') != pageId)
-				window.history.pushState(pageId, "Title", `/?page=${pageId}`);
+				window.history.pushState(pageId, "Title", `${window.location.pathname}?page=${pageId}`);
 
 			var baseName = pageId.split('/')[0];
 			var baseLastName = lastPage.split('/')[0];
