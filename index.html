@@ -1,0 +1,266 @@
+<html lang="en" xml:lang="en">
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Language" content="en">
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate">
+
+	<title>Husker's Home</title>
+	<script type="text/javascript">
+		let subPages = new Map();
+		var lastPage = "";
+		var lastScript;
+
+		var md;
+		var mdContent;
+		var onPageLoadExist;
+		var getTitleExist;
+
+		function onLoad(){
+			md = findById("md");
+			mdContent = findById("md-content");
+
+			// Prev/next page listener
+			window.addEventListener('popstate', function (e) {
+			    if (e.state !== null) 
+			        loadFromURL();
+			});
+			
+			// MD script loader
+			md.addEventListener('zero-md-rendered', function () {
+				if(onPageLoadExist)
+		  			onPageLoad();
+	  			document.title = `${getTitleExist ? `${getTitle()} - ` : ""}Husker's Home`
+	  			performTitles();
+			});
+
+			// Listener for navigations on right side
+			window.addEventListener('scroll', function(e) {
+	  			var elements = document.getElementsByTagName('h1');
+	  			var currentElement = elements[0].innerText;
+				for(var i = 0; i< elements.length; i++)
+					if(elements[i].getBoundingClientRect().top < 200)
+						currentElement = elements[i].innerText;
+				
+				var rightPane = findById("page-right");
+				var titles = rightPane.children;
+				for(var i = 0; i< titles.length; i++){
+					var title = titles[i];
+					if(currentElement == title.innerText)
+						title.classList.add("selected");
+					else
+						title.classList.remove("selected");
+				}
+			});
+
+			// For developing
+			/*
+			setTimeout(function(){			
+			   window.location.reload(1);
+			}, 2000);
+			*/
+			addButton('profile', "Profile", "far fa-user");
+
+			addButton('projects', "Projects", "fas fa-suitcase");
+			addSubButton('projects', 'projects/minui', "MinUI");
+			addSubButton('projects', 'projects/launcher', "Minecraft Launcher");
+			addSubButton('projects', 'projects/openglfx', "OpenGLFX");
+
+			loadFromURL();
+		}
+
+		function loadFromURL(){
+			let searchParams = new URLSearchParams(window.location.search);
+			if(searchParams.has('page'))
+				selectPage(searchParams.get('page'));
+			else
+				resetPage();
+		}
+
+		function resetPage(){
+			selectPage("profile");
+		}
+
+		function addButton(id, text, icon){
+			document.getElementById("page-left").innerHTML += 
+				`<div class="button noselect" id="page:${id}" onmousedown="selectPage('${id}')"><i class="${icon}"></i>${text}</div>`;
+			document.getElementById("page-left").innerHTML += 
+				`<div class="sub-button-container" id="sub-page-container:${id}"></div>`;
+		}
+
+		function addSubButton(parent, id, text){
+			document.getElementById(`sub-page-container:${parent}`).innerHTML += 
+				`<div class="sub-button noselect" id="page:${id}" onmousedown="selectPage('${id}')">${text}</div>`;
+		}
+
+		function selectPage(pageId){
+			// If current page in URL is correct, then do nothing (for prev/next page)
+			let searchParams = new URLSearchParams(window.location.search);
+			if(!searchParams.has('page') || searchParams.get('page') != pageId)
+				window.history.pushState(pageId, "Title", `/?page=${pageId}`);
+
+			var baseName = pageId.split('/')[0];
+			var baseLastName = lastPage.split('/')[0];
+
+			window.scrollTo(0, 0);
+			document.getElementById(`page:${baseLastName}`)?.classList.remove("button-selected");
+			document.getElementById(`page:${baseName}`)?.classList.add("button-selected");
+
+			// Sub button style
+			if(lastPage.includes("/"))
+				document.getElementById(`page:${lastPage}`)?.classList.remove("button-selected");
+			if(pageId.includes("/"))
+				document.getElementById(`page:${pageId}`)?.classList.add("button-selected");
+			
+			// If navigation pane is expaned, then hide it
+			findById("page-left").classList.remove("page-left-expanded")
+
+			loadPage(pageId);
+			setCollapsed(`sub-page-container:${pageId.split('/')[0]}`, true);
+			if(baseName != baseLastName)
+				setCollapsed(`sub-page-container:${lastPage.split('/')[0]}`, false);
+			lastPage = pageId;
+		}
+
+		function loadPage(pagePath){
+			var rawFile = new XMLHttpRequest();
+		    rawFile.open("GET", `pages/${pagePath}.md`, true);
+		    rawFile.onreadystatechange = function () {
+		        if(rawFile.readyState === 4 && (rawFile.status === 200 || rawFile.status == 0)){
+	                var text = rawFile.responseText;
+	                
+	                var script = text.includes("<script>") ? text.split("<script>")[1].split("<\/script>")[0] : "";
+	                text = text.replace(`<script>${script}<\/script>`, "");
+	                onPageLoadExist = script.includes("function onPageLoad");
+	                getTitleExist = script.includes("function getTitle");
+	                
+		      		// Add script to header
+                 	if(lastScript)
+						document.head.removeChild(lastScript);
+		            lastScript = document.createElement('script');
+					lastScript.text = script;
+					document.head.appendChild(lastScript);
+
+					// Render MD content
+					mdContent.text = text;
+					md.render();
+	            }
+		    }
+		    rawFile.send(null);
+		}
+
+		function switchLeftPanel(){
+			var pane = findById("page-left");
+			if(pane.classList.contains("page-left-expanded"))
+				pane.classList.remove("page-left-expanded")
+			else
+				pane.classList.add("page-left-expanded")
+		}
+
+		function findById(id){
+			return document.getElementById(id);
+		}
+
+		function setCollapsed(id, collapsed){
+			var element = findById(id);
+			if(!element)
+				return;
+			if (collapsed)
+		        element.style.height = Array.prototype.reduce.call(element.childNodes, function(p, c) {
+		        	var style = window.getComputedStyle(c);
+		        	return p + c.offsetHeight + parseInt(style.getPropertyValue('margin-bottom')) + parseInt(style.getPropertyValue('margin-top'));
+		        }, 0) + 'px';
+		    else
+		        element.style.height = '0px';
+		}
+
+		function performTitles(){
+			var rightPane = findById("page-right");
+			rightPane.innerHTML = " ";
+
+			var elements = document.getElementsByTagName('h1');
+			for(var i = 0; i< elements.length; i++){
+				if(elements[i].id){
+  					rightPane.innerHTML += `<div class="noselect" onmousedown="scrollToTitle('${elements[i].id}')">${elements[i].innerText}</div>`;
+					elements[i].innerHTML += `<div class="anchor" onmousedown="bindTitle('${elements[i].id}')"><i class="fas fa-link"></i><div>`;
+				}
+			}
+			if(window.location.href.includes("#"))
+				scrollToTitle(window.location.href.split("#")[1]);
+			else
+				rightPane.children[0].classList.add("selected");
+		}
+
+		function bindTitle(id){
+			var url = window.location.href;
+			var params = url.split("/?")[1];
+			if(params.includes("#"))
+				params = params.split("#")[0];
+
+			window.history.pushState("", "Title", `/?${params}#${id}`);
+			scrollToTitle(id);
+		}
+
+		function scrollToTitle(id){
+			window.scroll({
+			  top: findById(id).getBoundingClientRect().top + window.scrollY - 80,
+			  behavior: 'smooth'
+			});
+		}
+	</script>
+
+	<!-- <zero-md> MD file reader -->
+	<script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@2/dist/zero-md.min.js"></script>
+
+	<!-- Roboto font -->
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+	<!-- Awesome Font -->
+	<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
+
+	<link rel="icon" href="icon.png">
+	<link rel="stylesheet" href="styles/base_style.css">
+</head>
+
+<body onload="onLoad()">
+	<div id="header">
+		<div id="header-content" class="page-centered">
+			<div class="title-container">
+				<div class="title noselect menu-button" onclick="switchLeftPanel()"><i class="fas fa-bars"></i></div>
+				<div id="title-text" class="title noselect" onclick="resetPage()">
+					<img src="icon.png">
+					<a>Husker</a>
+					<a>dev.com</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="content" class="page-centered">
+		<div id="page-left"></div>
+		<div id="page-center">
+			<zero-md id="md" no-shadow="true" manual-render="true">
+				<template>
+					<link rel="stylesheet" href="styles/md.css">
+					<link rel="stylesheet" href="styles/extended-md.css">
+					<link rel="stylesheet" href="styles/code.css">
+				</template>
+				<script type="text/markdown" id="md-content"></script>
+			</zero-md>
+		</div>
+		<div id="page-right">
+			<div>About</div>
+			<div class="selected">Main projects</div>
+			<div>Languages</div>
+		</div>
+	</div>
+	<div style="clear: left;"></div>
+	<div id="bottom">
+		<div class="page-centered">
+			<div>© 2022 Huskerdev</div>
+			<br>
+			<a href="mailto:redfancoestar@gmail.com">redfancoestar@gmail.com</a>
+		</div>
+	</div>
+</body>
+</html>
