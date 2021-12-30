@@ -97,6 +97,7 @@
 		function selectPage(pageId){
 			// If current page in URL is correct, then do nothing (for prev/next page)
 			let searchParams = new URLSearchParams(window.location.search);
+			console.log(window.location.pathname);
 			if(!searchParams.has('page') || searchParams.get('page') != pageId)
 				window.history.pushState(pageId, "Title", `${window.location.pathname}?page=${pageId}`);
 
