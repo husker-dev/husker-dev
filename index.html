@@ -199,7 +199,7 @@
 			if(params.includes("#"))
 				params = params.split("#")[0];
 
-			window.history.pushState("", "Title", `/?${params}#${id}`);
+			window.history.pushState("", "Title", `${window.location.pathname}?${params}#${id}`);
 			scrollToTitle(id);
 		}
 
