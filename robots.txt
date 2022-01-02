@@ -1,0 +1,4 @@
+User-agent: *
+Crawl-delay: 5
+Host: husker.com
+Sitemap: http://huskerdev.com/sitemap.xml
