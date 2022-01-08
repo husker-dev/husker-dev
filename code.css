@@ -1,0 +1,42 @@
+.markdown-body pre {
+	background: var(--color-1);
+	border-radius: 5px;
+	box-shadow: inset 0px 0px 3px 3px rgba(0, 0, 0, 0.08);
+}
+
+code[class*="language-"],
+pre[class*="language-"],
+.token {
+	font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+	text-shadow: none;
+	color: var(--color-code-default);
+}
+
+.token.string {
+	color: var(--color-code-string);
+}
+
+.token.function {
+	/*
+	color: var(--color-code-function);
+	*/
+}
+
+.token.number {
+	color: var(--color-code-number);
+}
+
+.token.comment {
+	color: var(--color-code-comment);
+}
+
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: var(--color-code-keyword);
+}
+
+.token.keyword + .token.function {
+	color: var(--color-code-function);
+}
