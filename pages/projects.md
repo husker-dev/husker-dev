@@ -77,6 +77,8 @@
         height: 120pt;
         object-fit: cover;
         border-radius: 10px 10px 0px 0px;
+        animation-duration: 0.8s;
+        animation-name: fade;
     }
 
     .project div:nth-of-type(1) {
@@ -97,18 +99,9 @@
     .empty img {
         visibility: hidden;
     }
-
-    @keyframes fade {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
-    }
 </style>
 
-<h1 id="applications" class="floating" style="margin-top: 0 !important;">Applications</h1>
+<h1 id="applications" class="floating">Applications</h1>
 <div id="_applications" class="table-triple"></div>
 
 <h1 id="frameworks" class="floating">Frameworks</h1>

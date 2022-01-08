@@ -1,3 +1,7 @@
+.markdown-body h1:nth-child(2){
+	margin-top: 0px !important;
+}
+
 .page-separator-close{
 	margin-left: -15pt;
 	margin-right: -15pt;
@@ -40,8 +44,10 @@
 	contain: none !important;
 }
 
-hr {
-	background-color: var(--color-text-3) !important;
+.markdown-body hr {
+	background-color: var(--color-6) !important;
+	height: 0.20em;
+	border-radius: 2px;
 }
 
 .markdown-body h1, 
