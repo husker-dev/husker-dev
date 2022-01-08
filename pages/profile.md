@@ -52,7 +52,7 @@
 	.short-description .info-container .location i {
 		color: var(--color-text-1); 
 		text-align: center;
-		width: 50pt;
+		width: 20pt;
 	}
 
 	.social {
@@ -82,7 +82,7 @@
 		width: 196pt !important;
 		border-radius: 8pt;
 		padding-bottom: 5pt;
-		cursor: hand;
+		cursor: pointer;
 		box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.14);
 		background: var(--color-4);
 
@@ -165,15 +165,6 @@
 		margin-left: 20pt;
 		color: var(--color-text-1);
 	}
-
-	@keyframes fade {
-  		from {
-    		opacity: 0;
-	  	}
-	  	to {
-	    	opacity: 1;
-	  	}
-	}
 </style>
 
 <div class="short-description table">
@@ -207,6 +198,7 @@
 			<a target="_blank" href="https://steamcommunity.com/id/Husker41/"><i class="fab fa-steam"></i></a>
 			<a target="_blank" href="https://www.youtube.com/channel/UC-g8GtCo3uksikWi9dwjw3w"><i class="fab fa-youtube"></i></a>
 			<a target="_blank" href="https://open.spotify.com/user/i8fal2tft42g83r4uzqrnax7d"><i class="fab fa-spotify"></i></a>
+			<a target="_blank" href="https://instagram.com/shtengauer_nikita"><i class="fab fa-instagram"></i></a>
 		</div>
 	</div>
 </div>
@@ -217,17 +209,16 @@
 
 Hi, my name is Nikita, and I am a programmer (what a surprise). I am from a small Finnish town in Russia - Kostomuksha. I have been programming in Java since 2015. For all the time I managed to use a huge number of other languages, such as C#, Python or C++. But at the moment, Kotlin is the main one. I prefer to create desktop programs. It means no Spring or other backend frameworks.
 
-I don't really play games, except osu!, CS:GO and sometimes Minecraft.
-
 # Featured
 <div class="table-triple">
-	<div class="featured noselect">Music</div>
-	<div class="featured noselect">Books</div>
-	<div class="featured noselect">Videos</div>
+	<div class="featured noselect" onmousedown="selectPage('profile/music')">Music</div>
+	<div class="featured noselect" onmousedown="selectPage('profile/books')">Books</div>
+	<div class="featured noselect" onmousedown="selectPage('profile/videos')">Videos</div>
+	<div class="featured noselect" onmousedown="selectPage('profile/games')">Games</div>
 </div>
 
 # Main projects
-<div class="table-triple">
+<div class="table-triple noselect">
 	<div class="project" onmousedown="selectPage('projects/openglfx')">
 		<img src="resources/projects/openglfx/preview.jpg">
 		<div>OpenGLFX</div>
