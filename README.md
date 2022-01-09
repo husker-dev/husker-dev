@@ -1,5 +1,3 @@
-
-
 ## Languages
 
 <a href="https://en.wikipedia.org/wiki/Kotlin_(programming_language)"><img title="Kotlin" align="left" height="25" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/kotlin/kotlin.png"></a>
@@ -14,7 +12,6 @@
 
 <br />
 
-
 ## Tools
 
 <a href="https://en.wikipedia.org/wiki/IntelliJ_IDEA"><img title="IntelliJ IDEA" align="left" height="25" src="https://upload.wikimedia.org/wikipedia/commons/9/9c/IntelliJ_IDEA_Icon.svg"></a>
@@ -26,8 +23,5 @@
 
 <br />
 <br />
-<br />
   
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=husker-dev&hide=ruby&layout=compact&theme=dark&bg_color=0D1117&border_color=30363D)](https://github.com/husker-dev)
-  
-<!-- START gadpp -->
+### [huskerdev.com](huskerdev.com)
