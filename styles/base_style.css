@@ -61,7 +61,7 @@
 	padding:0px;
 	font-family: 'Roboto', sans-serif;
 	color: var(--color-text-2);
-	box-sizing: content-box !important;
+
 }
 
 html {
@@ -223,7 +223,7 @@ body {
 #page-right div.selected:before {
 	opacity: 1;
 	width: auto;
-  	margin-right: 5pt;
+	margin-right: 5pt;
 }
 
 #bottom {
@@ -279,8 +279,8 @@ h1:hover > .anchor {
 	cursor: pointer;
 
 	display: flex;
-  	align-items: center;
-  	transition: all 0.3s ease;
+	align-items: center;
+	transition: all 0.3s ease;
 }
 
 .button i{
@@ -301,7 +301,7 @@ h1:hover > .anchor {
 	padding-left: 25pt;
 	height: 0px;
 	overflow: hidden;
-  	transition: all 0.3s ease;
+	transition: all 0.3s ease;
 }
 
 .sub-button {
@@ -314,8 +314,8 @@ h1:hover > .anchor {
 	cursor: pointer;
 
 	display: flex;
-  	align-items: center;
-  	transition: all 0.3s ease;
+	align-items: center;
+	transition: all 0.3s ease;
 }
 
 .sub-button:hover{

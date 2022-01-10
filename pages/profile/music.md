@@ -1,22 +1,47 @@
 <script>
 	function onPageLoad(){
-		addArtist("AsperX", "asperx", "46hLf3g8XwZAeFq4BCFEAO", "3lDAqTHSTQ9sZEKjfLz553", "4gCuolsVspXZFan2Z3Yqi1");
-		addArtist("Лжедмитрий IV", "ljedmitry", "0saj0sp5KNIrhukoKG97k1", "3PHl2aox68MHBzBElkw2uo", "5OjDL2xOsa5S0YDfOw3EsM");
-		addArtist("Lodoss", "lodoss", "2X8G6hcWfiU4xDviZQNcEA", "06H4sWjMnKxAfrmYJfUo9m", "7FvP74YMkBOVkRBUo1AT2b");
-		addArtist("Обстоятельства", "obstoyatelstva", "4FKFBtpUimihqJS6Dcidjk", "0xY4lXjfxOHzgkVhE0pqVJ", "02vHDkck9uQjZnYuEpGoOK");
-		addArtist("ZOLOTO", "zoloto", "3JSYOR5ADA4YtkzsSaUxyg", "33roBRBTQ72Y197lGC6yh9", "478X2PsSMONBOJF9q2L6u2");
-		addArtist("Jubilee", "jubilee", "0ylzhZTuxB8E3cPtD7olds", "3P9QKSJtcBG9kBfKouZo7y", "2nc9ansSnAOttVlo2MWZA2");
+		addArtist("AsperX", "asperx", 
+			"bad_trip", "Bad Trip",
+			"kosmos", "Космос",
+			"sumashedshim_vhod_besplatno", "Сумасшедшим вход бесплатно"
+		);
+		addArtist("Лжедмитрий IV", "ljedmitriy", 
+			"ljeblagodat", "Лжеблагодать",
+			"bitva", "Битва",
+			"helltrigger", "Хэллтриггер"
+		);
+		addArtist("Lodoss", "lodoss", 
+			"vosmorka", "Восьмёрка",
+			"megalodon", "Мегалодон",
+			"jguchie", "Жгучие"
+		);
+		addArtist("Обстоятельства", "obstoyatelstva", 
+			"v_moih_glazah", "В моих глазах",
+			"stonut_minuti", "Стонут минуты",
+			"zavodnoy_apelsin", "Заводной апельсин"
+		);
+		addArtist("ZOLOTO", "zoloto", 
+			"poka", "Пока",
+			"ulitsi_jdali", "Улицы ждали",
+			"pmml", "PMML"
+		);
+		addArtist("Jubilee", "jubilee", 
+			"kladbiche_imeni_menya", "Кладбище имени меня",
+			"poisk", "Поиск",
+			"bolno", "Больно"
+		);
 	}
 
-	function addArtist(name, id, mus1, mus2, mus3){
+	function addArtist(name, id, mus1, mus1_title, mus2, mus2_title, mus3, mus3_title){
 		findById("artists").innerHTML += `
 			<div class="artist table">
-				<img src="resources/profile/${id}.jpg" />
-				<div>
+				<img src="resources/profile/music/${id}/image.jpg" id="image"/>
+				<div id="samples">
 					<h1 id="${id}">${name}</h1>
-					<iframe src="https://open.spotify.com/embed/track/${mus1}?utm_source=generator&theme=0" width="400px" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" class="music" onload="spotify(this)"></iframe>
-					<iframe src="https://open.spotify.com/embed/track/${mus2}?utm_source=generator&theme=0" width="400px" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" class="music"></iframe>
-					<iframe src="https://open.spotify.com/embed/track/${mus3}?utm_source=generator&theme=0" width="400px" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" class="music"></iframe>
+
+					<music-player src="resources/profile/music/${id}/${mus1}.mp3" title="${mus1_title}" singer="${name}" class="music"></music-player>
+					<music-player src="resources/profile/music/${id}/${mus2}.mp3" title="${mus2_title}" singer="${name}" class="music"></music-player>
+					<music-player src="resources/profile/music/${id}/${mus3}.mp3" title="${mus3_title}" singer="${name}" class="music"></music-player>
 				</div>
 			</div>
 			<hr/>
@@ -36,7 +61,7 @@
 	justify-content: center;
 }
 
-.artist img {
+.artist #image {
 	width: 260pt;
 	height: 260pt;
 	display: inline-block;
@@ -54,12 +79,11 @@
 	margin-top: 0pt !important;
 }
 
-.artist div {
+.artist #samples {
 	width: 270pt;
 }
 
 .music {
-	border-radius: 7px;
 	margin-bottom: 8pt;
 	width: 100%;
 }
