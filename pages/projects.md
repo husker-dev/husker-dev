@@ -30,7 +30,9 @@
         addProject('_utilities', 'weblafdark', 
             `WebLaF Dark Skin`, `Dark skin for WebLaF`);
 
-        // Pages
+        // Html pages
+        addProject('_pages', 'self', 
+            `This site`, `Personal site based on static html`);
         addProject('_pages', 'furrymap', 
             `Furry Map Wayback`, `Mixed data from furrymap.net and furmap.net`);
 
@@ -57,7 +59,7 @@
         height: 300px !important;
         border-radius: 8pt;
         padding-bottom: 5pt;
-        cursor: hand;
+        cursor: pointer;
         box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.14);
         background: var(--color-4);
 

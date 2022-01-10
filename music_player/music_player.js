@@ -9,7 +9,6 @@ class MusicPlayer extends HTMLElement {
 		let image = this.hasAttribute('image') ? this.getAttribute('image') : src.replace('.mp3', '.jpg');
 		let singer = this.getAttribute('singer');
 
-		let tmpl = document.createElement('template');
 		this.innerHTML = `
 			<div id="player_image_container">
 				<img id="player_logo" src="${image}" class="noselect"/>
@@ -26,38 +25,34 @@ class MusicPlayer extends HTMLElement {
 						<div id="player_progress_current"></div>
 						<i id="player_progress_slider" class="fas fa-circle"></i>
 					</div>
-					<div id="player_progress_duration" class="noselect">-0:00</div>
+					<div id="player_progress_duration" class="noselect">0:00</div>
 				</div>
 			</div>
 		`;
-		var instance = this;
+		const instance = this;
 
 		var isPlaying = false;
 		var isMouseDown = false;
 
-		var duration = this.querySelector("#player_progress_duration");
-		var audio = new Audio(src);
-		var play_button = this.querySelector("#player_play_button");
-		var progress = this.querySelector("#player_progress");
-		var progress_full = this.querySelector("#player_progress_full");
-		var progress_current = this.querySelector("#player_progress_current");
-		var progress_slider = this.querySelector("#player_progress_slider");
+		const duration = this.querySelector("#player_progress_duration");
+		const audio = new Audio(src);
+		const play_button = this.querySelector("#player_play_button");
+		const player_information = this.querySelector("#player_information");
+		const progress = this.querySelector("#player_progress");
+		const progress_full = this.querySelector("#player_progress_full");
+		const progress_current = this.querySelector("#player_progress_current");
+		const progress_slider = this.querySelector("#player_progress_slider");
 
 		audio.preload = 'metadata';
 		audio.volume = 0.5;
-		audio.onloadeddata = (event) => {
-			updateTime();
-		};
-		audio.onloadedmetadata = (event) => {
-			updateTime();
-		};
+		audio.onloadeddata = updateTime;
+		audio.onloadedmetadata = updateTime;
 		audio.ontimeupdate = (event) => {
 			var percent = audio.currentTime / audio.duration * 100;
 			progress_current.style.width = `${percent}%`;
 			progress_slider.style.left = `${percent}%`;
 			updateTime();
 		}
-		audio.src = src;
 		audio.onplaying = function() {
 	  		isPlaying = true;
 	  		updatePlaying();
@@ -66,8 +61,10 @@ class MusicPlayer extends HTMLElement {
 	  		isPlaying = false;
 	  		updatePlaying();
 		};
+		audio.src = src;
 
 		play_button.onclick = togglePlay;
+		player_information.onclick = togglePlay;
 
 		progress.onmousedown = (event) => {
 			if(!isPlaying)
@@ -105,12 +102,14 @@ class MusicPlayer extends HTMLElement {
 		function updateTime(){
 			if(!audio.duration)
 				return;
-			var time = audio.duration - audio.currentTime;
+			var time = audio.duration;
+			if(isPlaying)
+				time -= audio.currentTime;
 			var minutes = Math.floor(time / 60);
 			var seconds = Math.ceil(time % 60)-1;
 			if(seconds < 0)
 				setPercent(0);
-			duration.innerHTML = `-${minutes}:${seconds < 10 ? ('0'+seconds) : seconds}`;
+			duration.innerHTML = `${isPlaying ? -minutes : minutes}:${seconds < 10 ? ('0'+seconds) : seconds}`;
 		}
 
 		function updatePlaying(){
@@ -123,6 +122,7 @@ class MusicPlayer extends HTMLElement {
 				play_button.classList.add("fa-play");
 				play_button.classList.remove("fa-pause");
 			}
+			updateTime();
 		}
 	}
 
