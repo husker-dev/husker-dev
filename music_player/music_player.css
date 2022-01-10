@@ -97,6 +97,7 @@ music-player {
 	position: relative;
 	height: var(--progress-size);
 	top: calc(0px - var(--progress-size));
+	border-radius: var(--progress-size);
 	background: white;
 	width: 0%;
 	transition: all 0.15s ease;
@@ -107,6 +108,7 @@ music-player {
 	height: var(--progress-size);
 	width: 100%;
 	background: rgba(255, 255, 255, 0.1);
+	border-radius: var(--progress-size);
 }
 
 #player_progress_slider {
