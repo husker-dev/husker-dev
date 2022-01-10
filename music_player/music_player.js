@@ -43,7 +43,7 @@ class MusicPlayer extends HTMLElement {
 		var progress_current = this.querySelector("#player_progress_current");
 		var progress_slider = this.querySelector("#player_progress_slider");
 
-		audio.preload = 'auto';
+		audio.preload = 'metadata';
 		audio.volume = 0.5;
 		audio.onloadeddata = (event) => {
 			updateTime();
