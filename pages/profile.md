@@ -52,7 +52,7 @@
 	.short-description .info-container .location i {
 		color: var(--color-text-1); 
 		text-align: center;
-		width: 20pt;
+		width: 30pt;
 	}
 
 	.social {

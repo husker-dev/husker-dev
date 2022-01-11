@@ -33,6 +33,15 @@ music-player {
 	animation-name: fade;
 }
 
+#player_logo_icon {
+	height: 80px;
+	width: 80px;
+	position: absolute;
+	object-fit: cover;
+	color: black;
+	background: rgba(0, 0, 0, 0);
+}
+
 #player_play_button {
 	height: 80px;
 	width: 80px;
@@ -50,7 +59,7 @@ music-player {
 	opacity: 0;
 }
 
-#player_play_button:hover {
+.player_hover #player_play_button {
 	opacity: 1;
 }
 
@@ -98,14 +107,13 @@ music-player {
 	height: var(--progress-size);
 	top: calc(0px - var(--progress-size));
 	border-radius: var(--progress-size);
-	background: white;
+	background: rgba(255, 255, 255, 0.2);
 	width: 0%;
-	opacity: 0;
 	transition: all 0.15s ease;
 }
 
 .player_playing #player_progress_current {
-	opacity: 1;
+	background: white;
 }
 
 #player_progress_full {
