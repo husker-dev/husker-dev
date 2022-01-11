@@ -1,24 +1,34 @@
 var player_currently_playing = 0;
 var audio_currently_playing = 0;
+var audio_volume = 0.5;
 
 class MusicPlayer extends HTMLElement {
 
 	constructor(){
 		super();
 		let src = this.getAttribute('src');
-		let title = this.getAttribute('title');
+		let title = this.getAttribute('name');
 		let image = this.hasAttribute('image') ? this.getAttribute('image') : src.replace('.mp3', '.jpg');
 		let singer = this.getAttribute('singer');
 
 		this.innerHTML = `
 			<div id="player_image_container">
-				<img id="player_logo" src="${image}" class="noselect"/>
+				<img id="player_logo" src="${image}" class="noselect" onerror="this.onerror=null;this.src='music_player/empty.png';"/>
 				<i id="player_play_button" class="fas fa-play noselect"></i>
 			</div>
 			<div id="player_information_container">
-				<div id="player_information">
-					<div id="player_title">${title}</div>
-					<div id="player_singer">${singer}</div>
+				<div id="player_head">
+					<div id="player_information">
+						<div id="player_title">${title}</div>
+						<div id="player_singer">${singer}</div>
+					</div>
+					<div id="player_volume" class="noselect">
+						<i class="fas fa-volume-up"></i>
+						<div id="player_volume_bar">
+							<div id="player_volume_full"></div>
+							<div id="player_volume_current"></div>
+						</div>
+					</div>
 				</div>
 				<div id="player_progress">
 					<div id="player_progress_bar">
@@ -34,6 +44,7 @@ class MusicPlayer extends HTMLElement {
 
 		var isPlaying = false;
 		var isMouseDown = false;
+		var isVolumeMouseDown = false;
 
 		const duration = this.querySelector("#player_progress_duration");
 		const audio = new Audio(src);
@@ -44,8 +55,11 @@ class MusicPlayer extends HTMLElement {
 		const progress_current = this.querySelector("#player_progress_current");
 		const progress_slider = this.querySelector("#player_progress_slider");
 
+		const volume = this.querySelector("#player_volume");
+		const volume_bar = this.querySelector("#player_volume_bar");
+		const volume_current = this.querySelector("#player_volume_current");
+
 		audio.preload = 'auto';
-		audio.volume = 0.3;
 		audio.onloadeddata = updateTime;
 		audio.onloadedmetadata = updateTime;
 		audio.ontimeupdate = (event) => {
@@ -64,24 +78,56 @@ class MusicPlayer extends HTMLElement {
 		};
 		audio.src = src;
 
+		// Progress
 		progress.onmousedown = (event) => {
 			if(!isPlaying)
 				return;
 			var hitbox = progress_full.getBoundingClientRect();
 
-			setPercent((event.x - hitbox.x) / hitbox.width);
+			setProgress((event.x - hitbox.x) / hitbox.width);
 			isMouseDown = true;
 		}
 		document.addEventListener("mouseup", (event) => {
 			isMouseDown = false;
 		});
-
 		document.addEventListener("mousemove", (event) => {
 			if(isMouseDown){
 				var hitbox = progress_full.getBoundingClientRect();
-				setPercent((event.x - hitbox.x) / hitbox.width);
+				setProgress((event.x - hitbox.x) / hitbox.width);
 			}
 		});
+
+		// Volume
+		volume.onmouseenter = (event) => {
+			setVolume(audio_volume);
+		}
+		volume_bar.onmousedown = (event) => {
+			var hitbox = volume_bar.getBoundingClientRect();
+			setVolume((event.x - hitbox.x) / hitbox.width);
+			isVolumeMouseDown = true;
+		}
+		document.addEventListener("mouseup", (event) => {
+			isVolumeMouseDown = false;
+		});
+		document.addEventListener("mousemove", (event) => {
+			if(isVolumeMouseDown){
+				var hitbox = volume_bar.getBoundingClientRect();
+				setVolume((event.x - hitbox.x) / hitbox.width);
+			}
+		});
+
+		// Functions
+		function setVolume(percent){
+			if(percent > 1)
+				percent = 1;
+			if(percent < 0)
+				percent = 0;
+			audio_volume = percent;
+			audio.volume = percent;
+			if(percent != 0)
+				volume_current.style.width = `${percent * 100}%`;
+			
+		}
 
 		function togglePlay(){
 			if(audio_currently_playing && audio_currently_playing !== audio){
@@ -92,11 +138,12 @@ class MusicPlayer extends HTMLElement {
 			player_currently_playing = instance;
 			player_currently_playing.classList.add("player_selected");
 
+			audio.volume = audio_volume;
 			if(isPlaying) audio.pause();
 			else audio.play();
 		}
 
-		function setPercent(percent){
+		function setProgress(percent){
 			if(audio.duration)
 				audio.currentTime = Math.floor(audio.duration * percent);
 		}
@@ -110,7 +157,7 @@ class MusicPlayer extends HTMLElement {
 			var minutes = parseInt(time / 60);
 			var seconds = parseInt(time % 60);
 			if(seconds < 0)
-				setPercent(0);
+				setProgress(0);
 			duration.innerHTML = `${minutes}:${seconds < 10 ? ('0'+seconds) : seconds}`;
 		}
 

@@ -3,12 +3,17 @@ music-player {
 	height: 80px;
 	width: 300px;
 	border-radius: 8px;
-	contain: content;
 	display: flex;
 	background: rgba(0, 0, 0, 0.1);
+	transition: all 0.15s ease;
 
 	--progress-size: 4px;
+	--volume-size: 5px;
 	--slider-size: 10px;
+}
+
+.player_playing {
+	background: rgba(0, 0, 0, 0.2);
 }
 
 #player_image_container {
@@ -28,6 +33,7 @@ music-player {
 	position: absolute;
 	object-fit: cover;
 	background: rgba(0, 0, 0, 0);
+	border-radius: 8px 0 0 8px;
 
 	animation-duration: 1s;
 	animation-name: fade;
@@ -36,6 +42,7 @@ music-player {
 #player_logo_icon {
 	height: 80px;
 	width: 80px;
+	border-radius: 8px 0 0 8px;
 	position: absolute;
 	object-fit: cover;
 	color: black;
@@ -67,9 +74,81 @@ music-player {
 	opacity: 1;
 }
 
+#player_head {
+	display: flex;
+}
+
 #player_information {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+
+	padding-left: 8pt;
 	cursor: pointer;
-	padding: 0 8pt 0 8pt;
+	width: 100%;
+}
+
+#player_volume {
+	padding-right: 8pt;
+	padding-left: 4pt;
+	margin-bottom: 10px;
+	transition: all 0.15s ease;
+	width: 26pt;
+	display: flex;
+	border-radius: 8px;
+	z-index: 200;
+	opacity: 0;
+}
+
+.player_selected #player_volume:hover {
+	width: 200pt;
+	background: rgba(255, 255, 255, 0.08);
+	box-shadow: 0 0 15px 15px rgba(0, 0, 0, 0.07);
+	padding-top: 0px;
+	padding-left: 8pt;
+}
+
+.player_selected #player_volume {
+	opacity: 1;
+}
+
+#player_volume i {
+	padding-top: 12px;
+	color: rgba(255, 255, 255, 0.6);
+	transition: all 0.15s ease;
+	font-size: 11pt;
+}
+
+#player_volume_bar {
+	width: 60pt;
+	height: 100%;
+	margin-left: 10pt;
+	display: flex;
+	flex-wrap: wrap;
+    align-content: center;
+    transition: opacity 0.15s ease;
+    opacity: 0;
+}
+
+.player_selected #player_volume:hover #player_volume_bar {
+	opacity: 1;
+}
+
+#player_volume_full {
+	height: var(--volume-size);
+	width: 100%;
+	background: rgba(0, 0, 0, 0.4);
+	transform: translate(0, 50%);
+	border-radius: var(--volume-size);
+}
+
+#player_volume_current {
+	height: var(--volume-size);
+	width: 20%;
+	min-width: var(--volume-size);
+	transform: translate(0, -50%);
+	background: rgba(255, 255, 255, 0.8);
+	border-radius: var(--volume-size);
 }
 
 #player_title {
@@ -130,7 +209,8 @@ music-player {
 	width: var(--slider-size);
 	height: var(--slider-size);
 	margin-left: calc(0px - var(--slider-size)/2);
-	margin-top: calc(0px - var(--progress-size) - var(--slider-size)/2 - var(--progress-size)/2);
+	margin-top: calc(0px - var(--progress-size) - var(--progress-size)/2);
+	transform: translate(0, -50%);
 	left: 0%;
 	transition: all 0.15s ease;
 	opacity: 0;

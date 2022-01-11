@@ -39,18 +39,13 @@
 				<div id="samples">
 					<h1 id="${id}">${name}</h1>
 
-					<music-player src="resources/profile/music/${id}/${mus1}.mp3" title="${mus1_title}" singer="${name}" class="music"></music-player>
-					<music-player src="resources/profile/music/${id}/${mus2}.mp3" title="${mus2_title}" singer="${name}" class="music"></music-player>
-					<music-player src="resources/profile/music/${id}/${mus3}.mp3" title="${mus3_title}" singer="${name}" class="music"></music-player>
+					<music-player src="resources/profile/music/${id}/${mus1}.mp3" name="${mus1_title}" singer="${name}" class="music"></music-player>
+					<music-player src="resources/profile/music/${id}/${mus2}.mp3" name="${mus2_title}" singer="${name}" class="music"></music-player>
+					<music-player src="resources/profile/music/${id}/${mus3}.mp3" name="${mus3_title}" singer="${name}" class="music"></music-player>
 				</div>
 			</div>
 			<hr/>
 		`
-	}
-
-	function spotify(frame){
-		var css = "";
-		console.log(frame.contentWindow.document);
 	}
 </script>
 
