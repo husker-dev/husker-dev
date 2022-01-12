@@ -25,6 +25,6 @@ There is just a YouTube video here, I wanted to share
 
 <div class="youtube">
 	<div>
-		<iframe src="http://www.youtube.com/embed/vDUYLDtC5Qw" frameborder="0" allowfullscreen></iframe>
+		<iframe src="//www.youtube.com/embed/vDUYLDtC5Qw" frameborder="0" allowfullscreen></iframe>
 	</div>
 </div>
