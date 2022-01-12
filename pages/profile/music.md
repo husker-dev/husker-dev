@@ -85,7 +85,7 @@
 
 </style>
 
-# About
+# Info
 
 My favorite genre of music is **pop**, **rock** and **rap**. 
 

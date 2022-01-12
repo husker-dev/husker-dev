@@ -201,7 +201,7 @@ body {
 	width: 100%;
 	cursor: pointer;
 	font-size: 17pt;
-	height: 34pt;
+	padding-bottom: 10pt;
 	color: var(--color-text-3);
 	transition: all 0.2s ease;
 }

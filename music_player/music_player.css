@@ -113,10 +113,10 @@ music-player {
 }
 
 #player_volume i {
-	padding-top: 12px;
+	padding-top: 13px;
 	color: rgba(255, 255, 255, 0.6);
 	transition: all 0.15s ease;
-	font-size: 11pt;
+	font-size: 10pt;
 }
 
 #player_volume_bar {
