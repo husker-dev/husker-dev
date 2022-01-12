@@ -11,6 +11,8 @@
 		object-fit: cover;
 		border-radius: 10px;
 		background: rgba(0, 0, 0, 0);
+		animation-duration: 0.8s;
+		animation-name: fade;
 	}
 
 	.game h1 {

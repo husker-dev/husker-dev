@@ -25,9 +25,9 @@
 	.book img {
 		width: 200pt;
 		border-radius: 4px;
+		background:  rgba(0, 0, 0, 0);
 		animation-duration: 0.8s;
 		animation-name: fade;
-		background:  rgba(0, 0, 0, 0);
 	}
 </style>
 
