@@ -73,7 +73,7 @@ Here are the games that I actively play
 <div class="game">
 	<img src="resources/profile/games/minecraft.jpg" />
 	<div>
-		<h1 id="osu">Minecraft</h1>
+		<h1 id="minecraft">Minecraft</h1>
 		<div class="game-table">
 			<div><div>Since</div>2010</div>
 		</div>
@@ -84,7 +84,7 @@ Here are the games that I actively play
 <div class="game">
 	<img src="resources/profile/games/halflife.jpg" />
 	<div>
-		<h1 id="osu">Minecraft</h1>
+		<h1 id="halflife">Half-Life</h1>
 		<div class="game-table">
 			<div><div>Since</div>2013</div>
 			<div><div>Speedrun</div>Under 1 hour</div>
