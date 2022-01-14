@@ -4,7 +4,7 @@
 
 # Таблица производных
 
-<img src="http://www.avosetrov.ru/UP/MA/Osetrov_MA_DerivTable.jpg" width="340">
+<img src="http://avosetrov.ru/UP/MA/Osetrov_MA_DerivTable.jpg" width="340">
 
 ---
 # Часть 1
@@ -23,7 +23,7 @@
 <img src="https://www.semestr.ru/images/math/math/lim2-image001.gif" width="150">
 
 ## 1.6. Второй замечательный предел
-<img src="https://www.semestr.ru/images/math/math/lim1-image001.gif" width="150">
+<img src="https://function-x.ru/chapter5-2/vzp01.gif" width="150">
 
 ## 1.7. Виды неопределённостей
 <img src="https://www.dpva.ru/netcat_files/Image/GuideMathematics/limits/LiminsUnclerarity/mat_05_40.png" width="250">
