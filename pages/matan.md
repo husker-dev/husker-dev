@@ -30,7 +30,7 @@
 
 ## 1.9. Функция, непрерывная в точке
 - Определена в точке
-- правый и левый пределы равны
+- Правый и левый пределы равны
 	<img src="https://function-x.ru/chapter6-4/c002.gif" width=220>
 - Предел равен значению
 	<img src="https://function-x.ru/chapter6-4/c003.gif" width=220>
@@ -62,6 +62,9 @@
 **A < C < B**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Mvt2-2.svg/1200px-Mvt2-2.svg.png" width="280" style="background: white">
+
+
+<img src="https://www.ok-t.ru/studopediaru/baza14/1007862723058.files/image189.jpg" width="280">
 
 ## 2.5. Формула Тейлора
 <img src="https://dic.academic.ru/pictures/bse/gif/0147305367.gif" width="380">
