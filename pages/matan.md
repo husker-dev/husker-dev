@@ -2,6 +2,10 @@
 
 [Все вопросы](http://www.avosetrov.ru/UP/MA1/Osetrov_MA1_minimum2021.pdf)
 
+# Таблица производных
+
+<img src="http://www.avosetrov.ru/UP/MA/Osetrov_MA_DerivTable.jpg" width="340">
+
 ---
 # Часть 1
 ---
@@ -115,7 +119,7 @@ C 		– постоянная интегрирования
 <img src="http://reshit.ru/kartinki/integral/4.JPG" width="320">
 
 ## 3.4. Простейшие интегралы
-<img src="https://www.meme-arsenal.com/memes/1a6b49291fca6932b7fce90797b66b17.jpg" width="320">
+<img src="http://www.avosetrov.ru/UP/MA/Osetrov_MA_IntegralsTable.jpg" width="320">
 
 ## 3.5. Замена переменной
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQud8YPidfo-1kUIUBSotITBGZT1mzZ1oK0OA&usqp=CAU" width="320">
