@@ -60,7 +60,7 @@
         border-radius: 8pt;
         padding-bottom: 5pt;
         cursor: pointer;
-        box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.14);
+        box-shadow: 0px 4px 1px 1px rgba(0, 0, 0, 0.1);
         background: var(--color-4);
 
         animation-duration: 0.8s;
@@ -70,7 +70,7 @@
 
     .project:hover {
         background: var(--color-5);
-        transform: scale(1.015);
+        transform: scale(1.003);
     }
 
     .project img {
@@ -85,7 +85,7 @@
 
     .project div:nth-of-type(1) {
         color: var(--color-text-1);
-        font-size: 20pt;
+        font-size: 17pt;
         font-weight: 500;
         border-radius: 8pt; 
         margin: 8pt;

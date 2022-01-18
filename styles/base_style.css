@@ -187,6 +187,9 @@ body {
 }
 
 #page-right {
+	overflow-y: scroll;
+	overflow-x: hidden;
+	height: calc(100% - var(--top-bar-height) - 10pt);
 	margin-left: calc(var(--bar-width) + 883px);
 	padding-left: 10pt;
 	width: var(--bar-width);
@@ -195,21 +198,26 @@ body {
 	transition: all 0.2s ease;
 }
 
+#page-right::-webkit-scrollbar {
+    display: none;
+}
+
 #page-right div {
 	display: flex;
 	align-items: center;
 	width: 100%;
 	cursor: pointer;
-	font-size: 17pt;
-	padding-bottom: 10pt;
+	font-size: 15pt;
+	padding-bottom: 12pt;
 	color: var(--color-text-3);
-	transition: all 0.2s ease;
+	transition: all 0.3s ease;
 }
 
 #page-right div:before{
 	opacity: 0;
 	content: "\203A";
 	width: 0px;
+	transition: all 0.5s ease;
 }
 
 #page-right div:hover {
@@ -217,7 +225,7 @@ body {
 }
 
 #page-right div.selected {
-	font-size: 20pt;
+	/*font-size: 20pt;*/
 	color: var(--color-text-2);
 	padding-left: 5pt;
 }

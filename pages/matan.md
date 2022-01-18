@@ -4,7 +4,7 @@
 
 # Таблица производных
 
-<img src="https://mou6wordpresscom.files.wordpress.com/2016/01/proizvodnaya.jpg?w=640" width="340">
+<img src="http://www.avosetrov.ru/UP/MA/Osetrov_MA_DerivTable.jpg" width="340">
 
 ---
 # Часть 1
@@ -23,20 +23,20 @@
 <img src="https://www.semestr.ru/images/math/math/lim2-image001.gif" width="150">
 
 ## 1.6. Второй замечательный предел
-<img src="https://function-x.ru/chapter5-2/vzp01.gif" width="150">
+<img src="https://www.semestr.ru/images/math/math/lim1-image001.gif" width="150">
 
 ## 1.7. Виды неопределённостей
 <img src="https://www.dpva.ru/netcat_files/Image/GuideMathematics/limits/LiminsUnclerarity/mat_05_40.png" width="250">
 
 ## 1.9. Функция, непрерывная в точке
 - Определена в точке
-- Правый и левый пределы равны
+- правый и левый пределы равны
 	<img src="https://function-x.ru/chapter6-4/c002.gif" width=220>
 - Предел равен значению
 	<img src="https://function-x.ru/chapter6-4/c003.gif" width=220>
 
-## 1.10. Функция, непрерывная в отрезке
-Если непрерывна в каждой точке
+## 1.10. Функция, непрерывная в трезке
+Если непрервна в каждой точке
 
 ---
 # Часть 2
@@ -48,7 +48,7 @@
 "Темп роста"
 
 ## 2.2. Геометрический смысл производной
-Производная в точке x0 равна угловому коэффициенту касательной к графику функции y = f(x) в этой точке
+Производная в точке x 0 равна угловому коэффициенту касательной к графику функции y = f(x) в этой точке
 
 <img src="https://uztest.ru/Data/users/161/ghjbpd.gif" width="300">
 
@@ -63,15 +63,11 @@
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Mvt2-2.svg/1200px-Mvt2-2.svg.png" width="280" style="background: white">
 
-
-<img src="https://www.ok-t.ru/studopediaru/baza14/1007862723058.files/image189.jpg" width="280">
-
 ## 2.5. Формула Тейлора
 <img src="https://dic.academic.ru/pictures/bse/gif/0147305367.gif" width="380">
 
 ## 2.8. Экстремумы функции
 <img src="https://function-x.ru/image/extr1.jpg" width="230">
-
 
 - Необходимый признак:
 	- f'(x) = 0
@@ -83,7 +79,6 @@
 Точка графика, в которой он меняет выпуклость на вогнутость или вогнутость на выпуклость, называется точкой перегиба
 
 <img src="https://www.matematicus.ru/wp-content/uploads/2019/11/Tochka-peregiba-grafik-1.png" width="250">
-
 
 - Необходимый признак:
 	- f''(x) = 0
@@ -109,9 +104,9 @@
 
 <img src="https://portal.tpu.ru/SHARED/k/KONVAL/Sites/Russian_sites/Calc1-ru/11/03_files/image042.png" width="200">
 
-f(x) 	- подинтегральная функция
+f(x) 	- подынтегральная функция
 
-f(x)dx 	– подинтегральное выражение
+f(x)dx 	– подынтегральное выражение
 
 x 		– переменная интегрирования
 
@@ -132,7 +127,7 @@ C 		– постоянная интегрирования
 ## 3.7. Интегрирование по частям
 <img src="https://function-x.ru/chapter8-1/integral1_clip_image108.gif" width="220">
 
-## 3.8. Всегда ли можно взять интеграл от целой, дробной...
+## 3.8. всегда ли можно взять интеграл от целой, дробной...
 Старшая степень числителя  СТРОГО меньше старшей степени знаменателя, значит, дробь является правильной.
 
 ## 3.9. Типы дробей
@@ -140,4 +135,3 @@ C 		– постоянная интегрирования
 
 ## 3.10. Неберущийся интеграл
 Интеграл, который не выражается через элементарные функции.
-

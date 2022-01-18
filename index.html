@@ -55,8 +55,12 @@
 				var titles = rightPane.children;
 				for(var i = 0; i< titles.length; i++){
 					var title = titles[i];
-					if(currentElement == title.innerText)
-						title.classList.add("selected");
+					if(currentElement == title.innerText){
+						if(!title.classList.contains("selected")){
+							title.classList.add("selected");
+							title.scrollIntoView(false);
+						}
+					}
 					else
 						title.classList.remove("selected");
 				}
