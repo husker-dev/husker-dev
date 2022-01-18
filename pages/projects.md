@@ -34,7 +34,7 @@
         addProject('_pages', 'self', 
             `This site`, `Personal site based on static html`);
         addProject('_pages', 'furrymap', 
-            `Furry Map Wayback`, `Mixed data from furrymap.net and furmap.net`);
+            `Furmap Wayback`, `Mixed data from furmap.net and furrymap.net`);
 
     }
 
