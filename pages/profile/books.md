@@ -1,3 +1,8 @@
+<script>
+	function hasNavigation() { return false; }
+    function getTitle() { return "Books"; }
+</script>
+
 <style>
 	.book-title {
 		margin-bottom: 15pt;

@@ -1,4 +1,4 @@
-# Матан
+# Матананализ
 
 [Все вопросы](http://www.avosetrov.ru/UP/MA1/Osetrov_MA1_minimum2021.pdf)
 

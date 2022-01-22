@@ -1,3 +1,7 @@
+<script>
+	function hasNavigation() { return false; }
+</script>
+
 <style>
 	.short-description {
 		width: 100%;
@@ -38,6 +42,7 @@
 	.short-description .info-container .subtitle {
 		color: var(--color-text-3); 
 		font-size: 16pt;
+		white-space: nowrap;
 	}
 
 	.short-description .info-container .location {

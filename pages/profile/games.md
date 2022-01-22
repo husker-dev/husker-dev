@@ -1,3 +1,8 @@
+<script>
+	function hasNavigation() { return false; }
+    function getTitle() { return "Games"; }
+</script>
+
 <style>
 	.game {
 		display: flex;

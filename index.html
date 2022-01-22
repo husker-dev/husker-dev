@@ -14,8 +14,10 @@
 
 		var md;
 		var mdContent;
+		var needsLoad = false;
 		var onPageLoadExist;
 		var getTitleExist;
+		var hasNavigationExist;
 
 		function onLoad(){
 			md = findById("md");
@@ -23,13 +25,12 @@
 
 			// Prev/next page listener
 			window.addEventListener('popstate', function (e) {
-			    if (e.state !== null) 
-			        loadFromURL();
+		        loadFromURL();
 			});
 			
 			// MD script loader
 			md.addEventListener('zero-md-rendered', function () {
-				if(onPageLoadExist)
+				if(needsLoad && onPageLoadExist)
 		  			onPageLoad();
 	  			document.title = `${getTitleExist ? `${getTitle()} - ` : ""}Husker's Home`
 	  			if(!window.location.href.includes("#"))
@@ -66,18 +67,16 @@
 				}
 			});
 
-			// For developing
-			/*
-			setTimeout(function(){			
-			   window.location.reload(1);
-			}, 2000);
-			*/
 			addButton('profile', "Profile", "far fa-user");
 
 			addButton('projects', "Projects", "fas fa-suitcase");
 			addSubButton('projects', 'projects/minui', "MinUI");
 			addSubButton('projects', 'projects/launcher', "Minecraft Launcher");
 			addSubButton('projects', 'projects/openglfx', "OpenGLFX");
+
+			addButton('notes', 'Notes', "fas fa-bookmark");
+			addSubButton('notes', 'matan', "Матанализ");
+			addSubButton('notes', 'proga', "Программирование");
 
 			loadFromURL();
 		}
@@ -126,6 +125,7 @@
 			
 			// If navigation pane is expaned, then hide it
 			findById("page-left").classList.remove("page-left-expanded")
+			findById("invisible-pane").classList.remove("visible")
 
 			if(!window.location.href.includes("#"))
 				scrollToTop();
@@ -138,7 +138,7 @@
 
 		function loadPage(pagePath){
 			var rawFile = new XMLHttpRequest();
-		    rawFile.open("GET", `${window.location.pathname}pages/${pagePath}.md`, true);
+		    rawFile.open("GET", `${window.location.origin}/pages/${pagePath}.md`, true);
 		    rawFile.onreadystatechange = function () {
 		    	if(rawFile.readyState === 4){
 			        if(rawFile.status === 200 || rawFile.status == 0){
@@ -148,7 +148,8 @@
 		                text = text.replace(`<script>${script}<\/script>`, "");
 		                onPageLoadExist = script.includes("function onPageLoad");
 		                getTitleExist = script.includes("function getTitle");
-		                
+		                hasNavigationExist = script.includes("function hasNavigation");
+
 			      		// Add script to header
 	                 	if(lastScript)
 							document.head.removeChild(lastScript);
@@ -157,6 +158,7 @@
 						document.head.appendChild(lastScript);
 
 						// Render MD content
+						needsLoad = mdContent.text == "" || mdContent.text != text;
 						mdContent.text = text;
 						md.render();
 		            }else 
@@ -168,10 +170,15 @@
 
 		function switchLeftPanel(){
 			var pane = findById("page-left");
-			if(pane.classList.contains("page-left-expanded"))
+			var transparentPane = findById("invisible-pane");
+			if(pane.classList.contains("page-left-expanded")){
 				pane.classList.remove("page-left-expanded")
-			else
+				transparentPane.classList.remove("visible");
+			}
+			else{
 				pane.classList.add("page-left-expanded")
+				transparentPane.classList.add("visible");
+			}
 		}
 
 		function setCollapsed(id, collapsed){
@@ -189,7 +196,15 @@
 
 		function performTitles(){
 			var rightPane = findById("page-right");
+			var centerPane = findById("page-center");
+			var mobileNavigationList = findById("navigation-mobile-list");
 			rightPane.innerHTML = " ";
+			mobileNavigationList.innerHTML = "";
+
+			if(!hasNavigationExist || hasNavigation())
+				centerPane.classList.add("mobile-navigation");
+			else
+				centerPane.classList.remove("mobile-navigation");
 
 			var elements = document.getElementsByTagName('h1');
 			for(var i = 0; i< elements.length; i++){
@@ -198,6 +213,8 @@
 					var height = parseFloat(elements[i].getBoundingClientRect().height) - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
   					rightPane.innerHTML += `<div class="noselect" onmousedown="scrollToTitle('${elements[i].id}')">${elements[i].innerText}</div>`;
 					elements[i].innerHTML += `<div class="anchor" style="height: ${height}px" onmousedown="bindTitle('${elements[i].id}')"><i class="fas fa-link"></i><div>`;
+
+					mobileNavigationList.innerHTML += `<div class="navigation-mobile noselect" onmousedown="scrollToTitle('${elements[i].id}')">${elements[i].innerText}</div>`;
 				}
 			}
 			if(window.location.href.includes("#"))
@@ -260,6 +277,7 @@
 	<div id="content" class="page-centered">
 		<div id="page-left"></div>
 		<div id="page-center">
+			<div id="navigation-mobile-list"></div>
 			<zero-md id="md" no-shadow="true" manual-render="true">
 				<template>
 					<link rel="stylesheet" href="styles/md.css">
@@ -270,6 +288,7 @@
 			</zero-md>
 		</div>
 		<div id="page-right"></div>
+		<div id="invisible-pane" onmousedown="switchLeftPanel()"></div>
 	</div>
 	<div style="clear: left;"></div>
 	<div id="bottom">

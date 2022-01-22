@@ -1,4 +1,7 @@
 <script>
+	function hasNavigation() { return false; }
+    function getTitle() { return "Music"; }
+
 	function onPageLoad(){
 		addArtist("AsperX", "asperx", 
 			"bad_trip", "Bad Trip",
@@ -85,7 +88,7 @@
 
 </style>
 
-# Info
+# Information
 
 My favorite genre of music is **pop**, **rock** and **rap**. 
 

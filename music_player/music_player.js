@@ -2,7 +2,68 @@ var player_currently_playing = 0;
 var audio_currently_playing = 0;
 var audio_volume = 0.5;
 
+var player_svg_bars = `
+<svg id="player_play_anim" width="135" height="140" viewBox="0 0 135 140" xmlns="http://www.w3.org/2000/svg" fill="#f0f0f0">
+    <rect y="10" width="15" height="120" rx="6">
+        <animate attributeName="height"
+             begin="0.5s" dur="1s"
+             values="120;110;100;90;80;70;60;50;40;140;120" calcMode="linear"
+             repeatCount="indefinite" />
+        <animate attributeName="y"
+             begin="0.5s" dur="1s"
+             values="10;15;20;25;30;35;40;45;50;0;10" calcMode="linear"
+             repeatCount="indefinite" />
+    </rect>
+    <rect x="30" y="10" width="15" height="120" rx="6">
+        <animate attributeName="height"
+             begin="0.25s" dur="1s"
+             values="120;110;100;90;80;70;60;50;40;140;120" calcMode="linear"
+             repeatCount="indefinite" />
+        <animate attributeName="y"
+             begin="0.25s" dur="1s"
+             values="10;15;20;25;30;35;40;45;50;0;10" calcMode="linear"
+             repeatCount="indefinite" />
+    </rect>
+    <rect x="60" width="15" height="140" rx="6">
+        <animate attributeName="height"
+             begin="0s" dur="1s"
+             values="120;110;100;90;80;70;60;50;40;140;120" calcMode="linear"
+             repeatCount="indefinite" />
+        <animate attributeName="y"
+             begin="0s" dur="1s"
+             values="10;15;20;25;30;35;40;45;50;0;10" calcMode="linear"
+             repeatCount="indefinite" />
+    </rect>
+    <rect x="90" y="10" width="15" height="120" rx="6">
+        <animate attributeName="height"
+             begin="0.25s" dur="1s"
+             values="120;110;100;90;80;70;60;50;40;140;120" calcMode="linear"
+             repeatCount="indefinite" />
+        <animate attributeName="y"
+             begin="0.25s" dur="1s"
+             values="10;15;20;25;30;35;40;45;50;0;10" calcMode="linear"
+             repeatCount="indefinite" />
+    </rect>
+    <rect x="120" y="10" width="15" height="120" rx="6">
+        <animate attributeName="height"
+             begin="0.5s" dur="1s"
+             values="120;110;100;90;80;70;60;50;40;140;120" calcMode="linear"
+             repeatCount="indefinite" />
+        <animate attributeName="y"
+             begin="0.5s" dur="1s"
+             values="10;15;20;25;30;35;40;45;50;0;10" calcMode="linear"
+             repeatCount="indefinite" />
+    </rect>
+</svg>
+`;
+
+function isDesktop() {
+	return !navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
+};
+
 class MusicPlayer extends HTMLElement {
+
+	audio = 0;
 
 	constructor(){
 		super();
@@ -14,7 +75,9 @@ class MusicPlayer extends HTMLElement {
 		this.innerHTML = `
 			<div id="player_image_container">
 				<img id="player_logo" src="${image}" class="noselect" onerror="this.onerror=null;this.src='music_player/empty.png';"/>
+				<div id="player_logo_dark"></div>
 				<i id="player_play_button" class="fas fa-play noselect"></i>
+				${player_svg_bars}
 			</div>
 			<div id="player_information_container">
 				<div id="player_head">
@@ -22,7 +85,7 @@ class MusicPlayer extends HTMLElement {
 						<div id="player_title">${title}</div>
 						<div id="player_singer">${singer}</div>
 					</div>
-					<div id="player_volume" class="noselect">
+					<div id="player_volume" class="noselect" ${isDesktop()? ``: `style="opacity: 0"`}>
 						<i class="fas fa-volume-up"></i>
 						<div id="player_volume_bar">
 							<div id="player_volume_full"></div>
@@ -48,6 +111,7 @@ class MusicPlayer extends HTMLElement {
 
 		const duration = this.querySelector("#player_progress_duration");
 		const audio = new Audio(src);
+		this.audio = audio;
 		const play_button = this.querySelector("#player_play_button");
 		const player_information = this.querySelector("#player_information");
 		const progress = this.querySelector("#player_progress");
@@ -59,7 +123,7 @@ class MusicPlayer extends HTMLElement {
 		const volume_bar = this.querySelector("#player_volume_bar");
 		const volume_current = this.querySelector("#player_volume_current");
 
-		audio.preload = 'auto';
+		audio.preload = 'metadata';
 		audio.onloadeddata = updateTime;
 		audio.onloadedmetadata = updateTime;
 		audio.ontimeupdate = (event) => {
@@ -188,6 +252,10 @@ class MusicPlayer extends HTMLElement {
 
 		setClickable(play_button);
 		setClickable(player_information);
+	}
+
+	disconnectedCallback() {
+		this.audio.pause();
 	}
 }
 

@@ -1,3 +1,8 @@
+<script>
+	function hasNavigation() { return false; }
+	function getTitle() { return "404"; }
+</script>
+
 <style>
 	#empty-image {
 		width: 160pt;

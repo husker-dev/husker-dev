@@ -1,6 +1,9 @@
+<script>
+	function hasNavigation() { return false; }
+    function getTitle() { return "Videos"; }
+</script>
+
 <style>
-
-
 	.youtube > div {
 		position: relative;
 	  	padding-bottom: 56.5%;

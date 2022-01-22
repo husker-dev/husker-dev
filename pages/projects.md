@@ -1,4 +1,7 @@
 <script>
+    function hasNavigation() { return false; }
+    function getTitle() { return "Projects"; }
+
     function onPageLoad(){
         // Applications
         addProject('_applications', 'launcher', 
