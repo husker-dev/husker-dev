@@ -402,7 +402,7 @@ h1:hover > .anchor {
 
 	#invisible-pane.visible {
 		pointer-events: auto;
-		background: rgba(0, 0, 0, 0.15);
+		background: rgba(0, 0, 0, 0.3);
 	}
 
 	.page-centered {
