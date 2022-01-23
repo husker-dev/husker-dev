@@ -28,33 +28,33 @@
   		animation-name: fade;
 	}
 
-	.short-description .info-container {
+	.info-container {
 		vertical-align: top;
 		padding-left: 7pt !important;
 		transition: all 0.3s ease;
 	}
 
-	.short-description .info-container .title {
+	.info-container .title {
 		color: var(--color-text-1); 
 		font-size: 30pt;
 	}
 
-	.short-description .info-container .subtitle {
+	.info-container .subtitle {
 		color: var(--color-text-3); 
 		font-size: 16pt;
 		white-space: nowrap;
 	}
 
-	.short-description .info-container .location {
+	.info-container .location {
 		margin-top: 14pt !important;
 		margin-bottom: 19pt !important;
 	}
 
-	.short-description .info-container .location td {
+	.info-container .location td {
 		padding-top: 7pt !important;
 	}
 
-	.short-description .info-container .location i {
+	.info-container .location i {
 		color: var(--color-text-1); 
 		text-align: center;
 		width: 30pt;
@@ -215,7 +215,7 @@
 Hi, my name is Nikita, and I am a programmer (what a surprise). I am from a small Finnish town in Russia - Kostomuksha. I have been programming in Java since 2015. For all the time I managed to use a huge number of other languages, such as C#, Python or C++. But at the moment, Kotlin is the main one. I prefer to create desktop programs. It means no Spring or other backend frameworks.
 
 # Featured
-<div class="table-triple">
+<div class="table3">
 	<div class="featured noselect" onmousedown="selectPage('profile/music')">Music</div>
 	<div class="featured noselect" onmousedown="selectPage('profile/books')">Books</div>
 	<div class="featured noselect" onmousedown="selectPage('profile/videos')">Videos</div>
@@ -223,7 +223,7 @@ Hi, my name is Nikita, and I am a programmer (what a surprise). I am from a smal
 </div>
 
 # Main projects
-<div class="table-triple noselect">
+<div class="table3 noselect">
 	<div class="project" onmousedown="selectPage('projects/openglfx')">
 		<img src="resources/projects/openglfx/preview.jpg">
 		<div>OpenGLFX</div>
@@ -248,7 +248,7 @@ Hi, my name is Nikita, and I am a programmer (what a surprise). I am from a smal
 <br/>
 
 # Languages
-<div class="table-triple">
+<div class="table3">
 	<div class="language">
 		<img src="resources/languages/kotlin.png"/>
 		<a>Kotlin</a>

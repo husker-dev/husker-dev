@@ -1,0 +1,143 @@
+
+#invisible-pane {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: 98;
+	pointer-events: none;
+	transition: all 0.3s ease;
+
+}
+
+#content{
+	padding-top: calc(var(--top-bar-height) + 10pt);
+	min-height: calc(100% - 100pt - var(--top-bar-height));
+	transition: all 0.3s ease;
+}
+
+#page-center {
+	min-height: auto;
+	float: left;
+	width: calc(100% - var(--bar-width)*2);
+	
+	margin-bottom: 15pt;
+	margin-left: calc(var(--bar-width) + 10pt);
+
+	transition: all 0.3s ease;
+}
+
+#page-center .markdown-body{
+	padding: 15pt;
+	box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.08);
+	border-radius: var(--content-round);
+	background-color: var(--color-2);
+	transition: all 0.3s ease;
+}
+
+#navigation-mobile-container a{
+	font-size: 21pt;
+	color: var(--color-text-1);
+}
+
+#navigation-mobile-list{
+	padding-top: 10pt;
+	flex-direction: column;
+    align-items: center;
+    margin-bottom: 5pt;
+    display: none;
+}
+
+.navigation-mobile {
+	display: flex;
+    justify-content: center;
+
+    background: var(--color-2);
+    border-radius: 5px;
+
+	width: 75%;
+	padding: 10pt 10pt 10pt 10pt;
+	font-size: 14pt;
+	margin-bottom: 5pt;
+}
+
+.navigation-mobile:last-child { 
+	border-bottom: 0px;
+}
+
+.anchor {
+	cursor: pointer;
+	font-size: 9pt;
+	width: 13px !important;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-right: 3pt !important;
+	margin-left: -16px !important;
+	opacity: 0;
+	transition: all 0.2s ease;
+}
+
+h1:hover > .anchor {
+	opacity: 1;
+}
+
+.anchor i {
+	color: var(--color-text-3);
+	transition: all 0.2s ease;
+}
+
+.anchor:hover i {
+	color: var(--color-text-2);
+}
+
+
+/* Compact desktop */
+@media (max-width: 1430px) {
+	#invisible-pane {
+		margin-top: -10pt;
+	}
+
+	#invisible-pane.visible {
+		pointer-events: auto;
+		background: rgba(0, 0, 0, 0.3);
+	}
+
+	#page-center {
+		width: 867px;
+		margin-left: calc((100% - 837px - var(--bar-width))/2);
+	}
+}
+
+/* Mobile */
+@media (max-width: 1150px) {
+	#content{
+		padding-top: var(--top-bar-height);
+	}
+
+	.page-centered {
+		padding-left: 0pt;
+	}
+
+	#page-center {
+		width: 100%;
+		margin-bottom: 0pt;
+		margin-left: 0pt;
+	}
+
+	.markdown-body {
+		border-radius: 0px 0px var(--content-round) var(--content-round) !important;
+	}
+
+	.mobile-navigation .markdown-body {
+		border-radius: var(--content-round) !important;
+	}
+
+	.mobile-navigation #navigation-mobile-list {
+		display: flex;
+	}
+}
+
+/* Compact mobile */
+@media (max-width: 500px) {
+	
+}

@@ -1,0 +1,32 @@
+
+#bottom {
+	position: absolute;
+	float: left;
+	height: 60pt;
+	width: calc(100% - 10pt);
+	margin-top: 100pt;
+	padding-top: 10pt;
+	background: var(--color-0);
+	padding-left: 10pt;
+	z-index: 99;
+	
+}
+
+#bottom * {
+	color: var(--color-text-3);
+}
+
+/* Compact desktop */
+@media (max-width: 1430px) {
+	
+}
+
+/* Mobile */
+@media (max-width: 1150px) {
+	
+}
+
+/* Compact mobile */
+@media (max-width: 500px) {
+	
+}

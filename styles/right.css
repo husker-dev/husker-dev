@@ -1,0 +1,68 @@
+#page-right {
+	overflow-y: scroll;
+	overflow-x: hidden;
+	height: calc(100% - var(--top-bar-height) - 10pt);
+	margin-left: calc(var(--bar-width) + 883px);
+	padding-left: 10pt;
+	width: var(--bar-width);
+	float: left;
+	position: fixed;
+	transition: all 0.2s ease;
+	scrollbar-width: none;
+}
+
+#page-right::-webkit-scrollbar {
+    display: none;
+}
+
+#page-right div {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	cursor: pointer;
+	font-size: 15pt;
+	padding-bottom: 12pt;
+	color: var(--color-text-3);
+	transition: all 0.15s ease;
+}
+
+#page-right div:before{
+	opacity: 0;
+	content: "\203A";
+	width: 0px;
+}
+
+#page-right div:hover {
+	color: var(--color-text-2);
+}
+
+#page-right div.selected {
+	/*font-size: 20pt;*/
+	color: var(--color-text-2);
+	padding-left: 5pt;
+}
+
+#page-right div.selected:before {
+	opacity: 1;
+	width: auto;
+	margin-right: 5pt;
+}
+
+/* Compact desktop */
+@media (max-width: 1430px) {
+	#page-right {
+		margin-left: calc((100% - 837px - var(--bar-width))/2 + 837px + 20pt);
+	}
+}
+
+/* Mobile */
+@media (max-width: 1150px) {
+	#page-right {
+		margin-left: calc(var(--bar-width)*2 + 905px);
+	}
+}
+
+/* Compact mobile */
+@media (max-width: 500px) {
+	
+}

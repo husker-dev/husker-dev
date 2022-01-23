@@ -75,8 +75,8 @@
 			addSubButton('projects', 'projects/openglfx', "OpenGLFX");
 
 			addButton('notes', 'Notes', "fas fa-bookmark");
-			addSubButton('notes', 'matan', "Матанализ");
-			addSubButton('notes', 'proga', "Программирование");
+			addSubButton('notes', 'notes/matan', "Матанализ");
+			addSubButton('notes', 'notes/proga', "Программирование");
 
 			loadFromURL();
 		}
@@ -95,14 +95,14 @@
 
 		function addButton(id, text, icon){
 			document.getElementById("page-left").innerHTML += 
-				`<div class="button noselect" id="page:${id}" onmousedown="selectPage('${id}')"><i class="${icon}"></i>${text}</div>`;
+				`<div class="tab-button noselect" id="page:${id}" onmousedown="selectPage('${id}')"><i class="${icon}"></i>${text}</div>`;
 			document.getElementById("page-left").innerHTML += 
 				`<div class="sub-button-container" id="sub-page-container:${id}"></div>`;
 		}
 
 		function addSubButton(parent, id, text){
 			document.getElementById(`sub-page-container:${parent}`).innerHTML += 
-				`<div class="sub-button noselect" id="page:${id}" onmousedown="selectPage('${id}')">${text}</div>`;
+				`<div class="tab-sub-button noselect" id="page:${id}" onmousedown="selectPage('${id}')">${text}</div>`;
 		}
 
 		function selectPage(pageId){
@@ -114,14 +114,15 @@
 			var baseName = pageId.split('/')[0];
 			var baseLastName = lastPage.split('/')[0];
 
-			document.getElementById(`page:${baseLastName}`)?.classList.remove("button-selected");
-			document.getElementById(`page:${baseName}`)?.classList.add("button-selected");
+			// Buttons
+			document.getElementById(`page:${baseLastName}`)?.classList.remove("selected");
+			document.getElementById(`page:${baseName}`)?.classList.add("selected");
 
 			// Sub button style
 			if(lastPage.includes("/"))
-				document.getElementById(`page:${lastPage}`)?.classList.remove("button-selected");
+				document.getElementById(`page:${lastPage}`)?.classList.remove("selected");
 			if(pageId.includes("/"))
-				document.getElementById(`page:${pageId}`)?.classList.add("button-selected");
+				document.getElementById(`page:${pageId}`)?.classList.add("selected");
 			
 			// If navigation pane is expaned, then hide it
 			findById("page-left").classList.remove("page-left-expanded")
@@ -258,15 +259,21 @@
 	<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
 
 	<link rel="icon" href="icon.png">
-	<link rel="stylesheet" href="styles/base_style.css">
+
+	<link rel="stylesheet" href="styles/base.css">
+	<link rel="stylesheet" href="styles/header.css">
+	<link rel="stylesheet" href="styles/bottom.css">
+	<link rel="stylesheet" href="styles/left.css">
+	<link rel="stylesheet" href="styles/right.css">
+	<link rel="stylesheet" href="styles/center.css">
 </head>
 
 <body onload="onLoad()">
 	<div id="header">
 		<div id="header-content" class="page-centered">
-			<div class="title-container">
-				<div class="title noselect menu-button" onclick="switchLeftPanel()"><i class="fas fa-bars"></i></div>
-				<div id="title-text" class="title noselect" onclick="resetPage()">
+			<div class="header-title-container">
+				<div class="header-title noselect header-menu-button" onclick="switchLeftPanel()"><i class="fas fa-bars"></i></div>
+				<div class="header-title noselect" onclick="resetPage()">
 					<img src="icon.png">
 					<a>Husker</a>
 					<a>dev.com</a>
@@ -280,9 +287,9 @@
 			<div id="navigation-mobile-list"></div>
 			<zero-md id="md" no-shadow="true" manual-render="true">
 				<template>
-					<link rel="stylesheet" href="styles/md.css">
-					<link rel="stylesheet" href="styles/extended-md.css">
-					<link rel="stylesheet" href="styles/code.css">
+					<link rel="stylesheet" href="styles/md/md.css">
+					<link rel="stylesheet" href="styles/md/extended-md.css">
+					<link rel="stylesheet" href="styles/md/code.css">
 				</template>
 				<script type="text/markdown" id="md-content"></script>
 			</zero-md>

@@ -1,0 +1,131 @@
+:root {
+	--bar-width: 200pt;
+	--top-bar-height: 42pt;
+	--content-round: 10pt;
+}
+/*
+:root {
+	--color-background: rgb(230, 230, 230);
+	--color-content: rgb(240, 240, 240);
+	--color-text: rgb(50, 50, 50);
+	--color-text-light: rgb(160, 160, 160);
+	--color-text-semilight: rgb(100, 100, 100);
+	--color-title: rgb(240, 240, 240);
+	--color-btn-hover: rgb(220, 220, 220);
+	--color-btn-selected: rgb(200, 200, 200);
+}
+*/
+/*
+@media (prefers-color-scheme: dark) {
+	*/
+	
+	:root {
+		color-scheme: dark;
+		--color-0: rgb(30, 30, 30);
+		--color-1: rgb(40, 40, 40);
+		--color-2: rgb(48, 48, 48);
+		--color-3: rgb(50, 50, 50);
+		--color-4: rgb(55, 55, 55);
+		--color-5: rgb(60, 60, 60);
+		--color-6: rgb(65, 65, 65);
+
+		--color-button-hover: rgb(60, 60, 60);
+		--color-button-selected: rgb(50, 50, 50);
+
+		--color-text-1: rgb(230, 230, 230);
+		--color-text-2: rgb(200, 200, 200);
+		--color-text-3: rgb(140, 140, 140);
+
+		--color-code-default: rgb(169, 183, 198);
+		--color-code-keyword: rgb(204, 120, 50);
+		--color-code-function: rgb(255, 198, 109);
+		--color-code-string: rgb(106, 135, 89);
+		--color-code-comment: rgb(128, 128, 128);
+		--color-code-number: rgb(104, 151, 187);
+	}
+/*
+}
+*/
+
+.noselect {
+	-webkit-touch-callout: none; /* iOS Safari */
+	  -webkit-user-select: none; /* Safari */
+	   -khtml-user-select: none; /* Konqueror HTML */
+	     -moz-user-select: none; /* Old versions of Firefox */
+	      -ms-user-select: none; /* Internet Explorer/Edge */
+	          user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+	-webkit-tap-highlight-color: transparent;	/* Android tap */
+}
+
+* {
+	margin: 0px;
+	padding:0px;
+	font-family: 'Roboto', sans-serif;
+	color: var(--color-text-2);
+}
+
+html {
+	scroll-behavior: smooth;
+	height: 100%;
+}
+
+body {
+	background: var(--color-1);
+	height: 100%;
+}
+
+.table {
+	display: flex; 
+	gap: 15pt; 
+	flex-wrap: wrap;
+}
+
+.table:last-child { margin-right: auto; }
+
+.table3 {
+	display: grid;
+  	grid-template-columns: repeat(auto-fill, 196pt);
+  	grid-gap: 15pt;
+  	justify-content: space-evenly;
+}
+
+.page-centered {
+	padding-left: 8pt;
+	margin: auto;
+	max-width: 1050pt;
+}
+
+.button {
+	background: var(--color-5);
+	padding: 8px;
+	border-radius: 5px;
+	display: flex;
+	justify-content: center;
+	box-shadow: 0px 3px 1px 1px rgba(0, 0, 0, 0.1);
+	cursor: pointer;
+}
+
+.button:hover {
+	background: var(--color-6);
+}
+
+@keyframes fade {
+	from {
+		opacity: 0;
+  	}
+  	to {
+    	opacity: 1;
+  	}
+}
+
+@media (max-width: 1430px) {
+	
+}
+
+@media (max-width: 1150px) {
+
+}
+
+@media (max-width: 500px) {
+	
+}

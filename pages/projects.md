@@ -107,16 +107,16 @@
 </style>
 
 <h1 id="applications" class="floating">Applications</h1>
-<div id="_applications" class="table-triple"></div>
+<div id="_applications" class="table3"></div>
 
 <h1 id="frameworks" class="floating">Frameworks</h1>
-<div id="_frameworks" class="table-triple"></div>
+<div id="_frameworks" class="table3"></div>
 
 <h1 id="libraries" class="floating">Libraries</h1>
-<div id="_libraries" class="table-triple"></div>
+<div id="_libraries" class="table3"></div>
 
 <h1 id="utilities" class="floating">Utilities</h1>
-<div id="_utilities" class="table-triple"></div>
+<div id="_utilities" class="table3"></div>
 
 <h1 id="pages" class="floating">Pages</h1>
-<div id="_pages" class="table-triple"></div>
+<div id="_pages" class="table3"></div>
