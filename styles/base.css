@@ -90,7 +90,7 @@ mjx-container[jax="CHTML"][display="true"] {
 
 	background: var(--color-5) !important;
 	border-radius: 5px !important;
-
+	overflow: scroll;
 }
 
 .table {
