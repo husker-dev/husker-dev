@@ -1,19 +1,20 @@
 .markdown-body pre {
-	background: var(--color-1);
-	border-radius: 5px;
-	box-shadow: inset 0px 0px 3px 3px rgba(0, 0, 0, 0.08);
+	background: var(--color-1) !important;
+	border-radius: 5px !important;
+
 }
 
 code[class*="language-"],
 pre[class*="language-"],
 .token {
-	font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
-	text-shadow: none;
-	color: var(--color-code-default);
+	font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace !important;
+	text-shadow: none !important;
+	color: var(--color-code-default) !important;
+	background: var(--color-1) !important;
 }
 
 .token.string {
-	color: var(--color-code-string);
+	color: var(--color-code-string) !important;
 }
 
 .token.function {
@@ -23,20 +24,20 @@ pre[class*="language-"],
 }
 
 .token.number {
-	color: var(--color-code-number);
+	color: var(--color-code-number) !important;
 }
 
 .token.comment {
-	color: var(--color-code-comment);
+	color: var(--color-code-comment) !important;
 }
 
 
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-	color: var(--color-code-keyword);
+	color: var(--color-code-keyword) !important;
 }
 
 .token.keyword + .token.function {
-	color: var(--color-code-function);
+	color: var(--color-code-function) !important;
 }

@@ -2,22 +2,74 @@
 	margin-top: 0px !important;
 }
 
+.page-separator {
+	margin-top: calc(0px - var(--content-round)/2);
+	margin-bottom: calc(0px - var(--content-round)/2);
+	margin-left: -20pt;
+	margin-right: -20pt;
+
+	background: var(--color-1);
+	clip-path: inset(calc(var(--content-round)) calc(-5pt) calc(var(--content-round)) 0pt);
+}
+
+.page-separator::before{
+	margin-bottom: 16pt;
+
+	content: '';
+	display: flex;
+	width: calc(100% - 10pt);
+	background: var(--color-2);
+	margin-left: 5pt;
+
+	height: calc(2 * var(--content-round));
+	border-radius: var(--content-round);
+	clip-path: inset(var(--content-round) calc(-5pt) calc(0pt - var(--content-round)) calc(-5pt));
+	box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.08);
+}
+.page-separator::after{
+	content: " ";
+	display: flex;
+	width: calc(100% - 10pt);
+	background: var(--color-2);
+	margin-left: 5pt;
+
+	height: calc(2 * var(--content-round));
+	border-radius: var(--content-round);
+	clip-path: inset(calc(0pt - var(--content-round)) calc(-5pt) calc(var(--content-round)) calc(-5pt));
+	box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.08);
+}
+
+@media (max-width: 1150px) {
+	.page-separator {
+		margin-right: 0px;
+		width: calc(100% + 35pt);
+	}
+	.page-separator::before{
+		width: calc(100% - 5pt);
+	}
+	.page-separator::after{
+		width: calc(100% - 5pt);
+	}
+}
+
 .page-separator-close{
+	margin-top: calc(0px - var(--content-round)/2);
 	margin-left: -15pt;
 	margin-right: -15pt;
 	border-radius: var(--content-round);
 	height: calc(2 * var(--content-round));
 	clip-path: inset(var(--content-round) 0pt calc(0pt - var(--content-round)) 0pt);
-	box-shadow: 0pt 0pt 5pt 5pt rgba(0, 0, 0, 0.25);
+	box-shadow: 0pt 0pt 3pt 3pt rgba(0, 0, 0, 0.2);
 }
 
 .page-separator-open{
+	margin-bottom: calc(0px - var(--content-round)/2);
 	margin-left: -15pt;
 	margin-right: -15pt;
 	border-radius: var(--content-round);
 	height: calc(2 * var(--content-round));
 	clip-path: inset(calc(0pt - var(--content-round)) 0pt calc(var(--content-round)) 0pt);
-	box-shadow: 0pt 0pt 5pt 5pt rgba(0, 0, 0, 0.25);
+	box-shadow: 0pt 0pt 3pt 3pt rgba(0, 0, 0, 0.2);
 }
 
 .transparent-table,
@@ -46,8 +98,8 @@
 
 .markdown-body hr {
 	background-color: var(--color-6) !important;
-	height: 0.20em;
-	border-radius: 2px;
+	height: 0.20em !important;
+	border-radius: 2px !important;
 }
 
 .markdown-body h1, 
@@ -57,6 +109,6 @@
 .markdown-body h5, 
 .markdown-body h6 {
 	font-weight: 400 !important;
-	color: var(--color-text-1);
-	border-bottom: 0px;
+	color: var(--color-text-1) !important;
+	border-bottom: 0px !important;
 }

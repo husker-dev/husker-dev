@@ -24,7 +24,7 @@
 		--color-0: rgb(30, 30, 30);
 		--color-1: rgb(40, 40, 40);
 		--color-2: rgb(48, 48, 48);
-		--color-3: rgb(50, 50, 50);
+		--color-3: rgb(51, 51, 51);
 		--color-4: rgb(55, 55, 55);
 		--color-5: rgb(60, 60, 60);
 		--color-6: rgb(65, 65, 65);
@@ -42,6 +42,8 @@
 		--color-code-string: rgb(106, 135, 89);
 		--color-code-comment: rgb(128, 128, 128);
 		--color-code-number: rgb(104, 151, 187);
+
+		--color-math: rgb(150, 150, 150);
 	}
 /*
 }
@@ -72,6 +74,23 @@ html {
 body {
 	background: var(--color-1);
 	height: 100%;
+}
+
+mjx-math * {
+    font-family: MJXZERO, MJXTEX;
+    color: var(--color-math);
+}
+
+mjx-container[jax="CHTML"][display="true"] {
+	text-align: left !important;
+	padding-left: 15pt !important;
+
+	margin: 7px  !important;
+	padding: 9pt;
+
+	background: var(--color-5) !important;
+	border-radius: 5px !important;
+
 }
 
 .table {

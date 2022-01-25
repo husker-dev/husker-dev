@@ -85,6 +85,12 @@
 		margin-top: -10pt;
 		margin-left: -10pt;
 	}
+	.page-left-expanded {
+		transform: translate(0, 0) !important;
+		opacity: 1 !important;
+		background: var(--color-0);
+		box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.3);
+	}
 }
 
 /* Mobile */

@@ -4,6 +4,10 @@
 </script>
 
 <style>
+	.youtube {
+		padding-bottom: 10pt;
+	}
+
 	.youtube > div {
 		position: relative;
 	  	padding-bottom: 56.5%;
@@ -29,5 +33,14 @@ There is just a YouTube video here, I wanted to share
 <div class="youtube">
 	<div>
 		<iframe src="//www.youtube.com/embed/vDUYLDtC5Qw" frameborder="0" allowfullscreen></iframe>
+	</div>
+</div>
+
+
+# C18H27NO3(extend) (osu!)
+
+<div class="youtube">
+	<div>
+		<iframe src="//www.youtube.com/embed/TQ7Y7b8ubWo" frameborder="0" allowfullscreen></iframe>
 	</div>
 </div>

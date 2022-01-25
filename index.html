@@ -23,19 +23,36 @@
 			md = findById("md");
 			mdContent = findById("md-content");
 
+			addButton('profile', "Profile", "far fa-user");
+
+			addButton('posts', "Posts", "fas fa-quote-right");
+
+			addButton('projects', "Projects", "fas fa-suitcase");
+			addSubButton('projects', 'projects/minui', "MinUI");
+			addSubButton('projects', 'projects/launcher', "Minecraft Launcher");
+			addSubButton('projects', 'projects/openglfx', "OpenGLFX");
+
+			addButton('notes', 'Notes', "fas fa-bookmark");
+			addSubButton('notes', 'notes/matan', "Матанализ");
+			addSubButton('notes', 'notes/proga', "Программирование");
+			addSubButton('notes', 'notes/aig', "АиГ");
+
 			// Prev/next page listener
 			window.addEventListener('popstate', function (e) {
 		        loadFromURL();
 			});
 			
 			// MD script loader
-			md.addEventListener('zero-md-rendered', function () {
+			md.addEventListener('zero-md-rendered', function (e) {
+				if(e.target != md)
+					return;
 				if(needsLoad && onPageLoadExist)
 		  			onPageLoad();
 	  			document.title = `${getTitleExist ? `${getTitle()} - ` : ""}Husker's Home`
 	  			if(!window.location.href.includes("#"))
 	  				scrollToTop();
 	  			performTitles();
+	  			MathJax.typeset();
 			});
 
 			// Listener for navigations on right side
@@ -66,17 +83,6 @@
 						title.classList.remove("selected");
 				}
 			});
-
-			addButton('profile', "Profile", "far fa-user");
-
-			addButton('projects', "Projects", "fas fa-suitcase");
-			addSubButton('projects', 'projects/minui', "MinUI");
-			addSubButton('projects', 'projects/launcher', "Minecraft Launcher");
-			addSubButton('projects', 'projects/openglfx', "OpenGLFX");
-
-			addButton('notes', 'Notes', "fas fa-bookmark");
-			addSubButton('notes', 'notes/matan', "Матанализ");
-			addSubButton('notes', 'notes/proga', "Программирование");
 
 			loadFromURL();
 		}
@@ -258,6 +264,10 @@
 	<!-- Awesome Font -->
 	<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
 
+	<!-- Mathjax -->
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 	<link rel="icon" href="icon.png">
 
 	<link rel="stylesheet" href="styles/base.css">
@@ -266,6 +276,10 @@
 	<link rel="stylesheet" href="styles/left.css">
 	<link rel="stylesheet" href="styles/right.css">
 	<link rel="stylesheet" href="styles/center.css">
+
+	<link rel="stylesheet" href="styles/md/md.css">
+	<link rel="stylesheet" href="styles/md/extended-md.css">
+	<link rel="stylesheet" href="styles/md/code.css">
 </head>
 
 <body onload="onLoad()">
@@ -286,11 +300,6 @@
 		<div id="page-center">
 			<div id="navigation-mobile-list"></div>
 			<zero-md id="md" no-shadow="true" manual-render="true">
-				<template>
-					<link rel="stylesheet" href="styles/md/md.css">
-					<link rel="stylesheet" href="styles/md/extended-md.css">
-					<link rel="stylesheet" href="styles/md/code.css">
-				</template>
 				<script type="text/markdown" id="md-content"></script>
 			</zero-md>
 		</div>
