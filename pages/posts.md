@@ -21,7 +21,7 @@
 				checkLastPost();
 			});
 			checkLastPost();
-		}, 0);
+		}, 10);
 	}
 
 	function getPageContent(i){

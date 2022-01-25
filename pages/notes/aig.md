@@ -257,7 +257,7 @@ $$ А*А^{-1} = Е $$
 ## 46. Векторы. Определение. Разложение вектора по базису.
 - Вектор - Изображаемая отрезком прямой математическая величина, характеризующаяся численным значением и направлением.
 - Базис
-	<img src="https://yukhym.com/images/stories/Vector/Vec6_02.gif" width="400" />
+	<img src="https://psv4.userapi.com/c532036/u74005517/docs/d50/04265252c887/Vec6_02.png?extra=1056hpQ8G81y05SmtZ0RWczdP659pU7R8pmg0_uLKQWRO7PkN0s7mPeS-QXQq_pmPzUz69qoclDUKxJ3sc-I3YN2CngGt90JXGHt2FavMWp_zMc8Tp2HSlkTZAu-TGgXsQOngpOodbjprY-HZkOio5s" width="400" />
 
 ## 47. Скалярное произведение векторов и его свойства
 
