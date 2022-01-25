@@ -90,7 +90,13 @@ mjx-container[jax="CHTML"][display="true"] {
 
 	background: var(--color-5) !important;
 	border-radius: 5px !important;
-	overflow: scroll;
+	overflow-x: scroll;
+	overflow-y: hidden;
+	scrollbar-width: none;
+}
+
+mjx-container[jax="CHTML"][display="true"]::-webkit-scrollbar {
+    display: none;
 }
 
 .table {
