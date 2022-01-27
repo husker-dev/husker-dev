@@ -19,7 +19,7 @@
 	}
 </style>
 <script>
-	var version = "2.5.1"
+	var version = "2.6"
 
 	var maven_repositories = 
 `<repositories>
