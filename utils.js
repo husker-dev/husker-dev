@@ -35,3 +35,8 @@ function doesFileExist(urlToFile) {
      
     return xhr.status !== 404;
 }
+
+function putCode(element, tag, code){
+	element.innerHTML = `<pre><code class="language-${tag}">${code.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>`;
+	Prism.highlightElement(element.querySelector('code'));
+}
