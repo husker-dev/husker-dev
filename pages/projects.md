@@ -18,8 +18,8 @@
         // Libraries
         addProject('_libraries', 'openglfx', 
             `OpenGLFX`, `OpenGL implementation for JavaFX, that uses LWJGL or JOGL`);
-        addProject('_libraries', 'mio', 
-            `MIO`, `Lightweight library for easy I/O usage with progress handling`);
+        addProject('_libraries', 'nioex', 
+            `NioEx`, `Advanced usage of Kotlin I/O`);
         addProject('_libraries', 'jmapviewer', 
             `JMapViewer`, `Simple map viewer for Swing`);
         addProject('_libraries', 'simplehttp', 

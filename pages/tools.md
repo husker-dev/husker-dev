@@ -1,3 +1,7 @@
+<script>
+	function hasNavigation() { return false; }
+</script>
+
 # Tools
 
 <div class="table3">

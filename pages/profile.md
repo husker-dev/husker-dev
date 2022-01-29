@@ -46,18 +46,20 @@
 	}
 
 	.info-container .location {
-		margin-top: 14pt !important;
-		margin-bottom: 19pt !important;
+		margin-top: 7pt !important;
+		margin-bottom: 13pt !important;
 	}
 
-	.info-container .location td {
-		padding-top: 7pt !important;
+	.info-container .location > div {
+		padding-top: 4pt !important;
+		display: flex;
+		align-items: center;
 	}
 
 	.info-container .location i {
 		color: var(--color-text-1); 
 		text-align: center;
-		width: 30pt;
+		width: 35pt;
 	}
 
 	.social {
@@ -177,25 +179,27 @@
 		<img src="resources/avatar.jpg"/>
 	</div>
 	<div class="info-container">
-		<div class="title">Nikita Shtengauer <a class="subtitle">aka Husker</a></div>
+		<div class="title">Nikita Shtengauer <span class="subtitle">aka Husker</span></div>
 		<div class="subtitle">Java Desktop developer</div>
-		<table class="transparent-table location">
-			<tr>
-				<td><i class="fas fa-map-marker-alt"></i></td>
-				<td>
+		<div class="location">
+			<div>
+				<i class="fas fa-map-marker-alt"></i>
+				<div>
 					Russia, Karelia, Kostomuksha<br/>
 					Russia, Saint Petersburg
-				</td>
-			</tr>
-			<tr>
-				<td><i class="far fa-envelope"></td>
-				<td><a href="mailto:redfancoestar@gmail.com" class="transparent-link">redfancoestar@gmail.com</a></td>
-			</tr>
-			<tr>
-				<td><i class="fab fa-discord"></td>
-				<td>Husker<span style="color: var(--color-text-3)">#7956</span></td>
-			</tr>
-		</table>
+				</div>
+			</div>
+			<div>
+				<i class="far fa-envelope"></i>
+				<div><a href="mailto:redfancoestar@gmail.com" class="transparent-link">redfancoestar@gmail.com</a></div>
+			</div>
+			<div>
+				<i class="fab fa-discord"></i>
+				<div>
+					Husker<span style="color: var(--color-text-3)">#7956</span>
+				</div>
+			</div>
+		</div>
 		<div class="social table noselect" style="justify-content: space-around">
 			<a target="_blank" href="https://vk.com/shtengauer_nikita"><i class="fab fa-vk"></i></a>
 			<a target="_blank" href="https://github.com/husker-dev"><i class="fab fa-github"></i></a>

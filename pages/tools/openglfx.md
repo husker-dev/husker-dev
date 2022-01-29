@@ -19,7 +19,16 @@
 	}
 </style>
 <script>
-	var version = "2.6"
+	function hasNavigation() { return false; }
+
+	var version = "[load error]"
+
+	function onPageLoad(){
+		loadURLContent("https://api.github.com/repos/husker-dev/openglfx/releases/latest", text => {
+			version = JSON.parse(text)["tag_name"];
+			updateCode();
+		})
+	}
 
 	var maven_repositories = 
 `<repositories>
@@ -33,12 +42,12 @@
 `<dependency>
     <groupId>com.github.husker-dev.openglfx</groupId>
     <artifactId>core</artifactId>
-    <version>${version}</version>
+    <version>$version</version>
 </dependency>
 <dependency>
     <groupId>com.github.husker-dev.openglfx</groupId>
     <artifactId>$module</artifactId>
-    <version>${version}</version>
+    <version>$version</version>
 </dependency>`
 
 	var gradle_repositories = 
@@ -49,9 +58,16 @@
 	var gradle_dependency = 
 `dependencies {
     // ...
-    implementation 'com.github.husker-dev.openglfx:core:${version}'
-    implementation 'com.github.husker-dev.openglfx:$module:${version}'
+    implementation 'com.github.husker-dev.openglfx:core:$version'
+    implementation 'com.github.husker-dev.openglfx:$module:$version'
 }`
+
+	var sbt_repositories = 
+`resolvers += "jitpack" at "https://jitpack.io"`
+	
+	var sbt_dependency = 
+`libraryDependencies += "com.github.husker-dev.openglfx" % "core" % "$version"
+libraryDependencies += "com.github.husker-dev.openglfx" % "$module" % "$version"`
 
 	var java_example = 
 `OpenGLCanvas canvas = OpenGLCanvas.create($module);
@@ -107,6 +123,11 @@ canvas.onDispose {
 		const code_maven = block_maven.querySelector('#maven-code');
 		const code_maven2 = block_maven.querySelector('#maven-code2');
 
+		const sbt = findById("radio_sbt");
+		const block_sbt = findById("sbt-block");
+		const code_sbt = block_sbt.querySelector('#sbt-code');
+		const code_sbt2 = block_sbt.querySelector('#sbt-code2');
+
 		const kotlin = findById("radio_kotlin");
 		const block_kotlin = findById("kotlin-block");
 		const code_kotlin = block_kotlin.querySelector('#kotlin-code');
@@ -115,23 +136,42 @@ canvas.onDispose {
 		const block_java = findById("java-block");
 		const code_java = block_java.querySelector('#java-code');
 
-		if((lwjgl.checked || jogl.checked) && (gradle.checked || maven.checked) && (kotlin.checked || java.checked)){
+		if((lwjgl.checked || jogl.checked) && (gradle.checked || maven.checked || sbt.checked) && (kotlin.checked || java.checked)){
 			const isLWJGL = lwjgl.checked;
 			const isGradle = gradle.checked;
+			const isMaven = maven.checked;
 			const isKotlin = kotlin.checked;
 
 			if(isGradle){
 				block_gradle.classList.remove("invisible");
 				block_maven.classList.add("invisible");
+				block_sbt.classList.add("invisible");
 
 				putCode(code_gradle, "groovy", gradle_repositories);
-				putCode(code_gradle2, "groovy", gradle_dependency.replace("$module", isLWJGL? "lwjgl" : "jogl"));
-			}else{
-				block_maven.classList.remove("invisible");
+				putCode(code_gradle2, "groovy", gradle_dependency
+					.replaceAll("$module", isLWJGL? "lwjgl" : "jogl")
+					.replaceAll("$version", version)
+				);
+			}else if(isMaven){
 				block_gradle.classList.add("invisible");
+				block_maven.classList.remove("invisible");
+				block_sbt.classList.add("invisible");
 
 				putCode(code_maven, "xml", maven_repositories);
-				putCode(code_maven2, "xml", maven_dependency.replace("$module", isLWJGL? "lwjgl" : "jogl"));
+				putCode(code_maven2, "xml", maven_dependency
+					.replaceAll("$module", isLWJGL? "lwjgl" : "jogl")
+					.replaceAll("$version", version)
+				);
+			}else {
+				block_gradle.classList.add("invisible");
+				block_maven.classList.add("invisible");
+				block_sbt.classList.remove("invisible");
+
+				putCode(code_sbt, "scala", sbt_repositories);
+				putCode(code_sbt2, "scala", sbt_dependency
+					.replaceAll("$module", isLWJGL? "lwjgl" : "jogl")
+					.replaceAll("$version", version)
+				);
 			}
 
 			if(isKotlin){
@@ -147,7 +187,7 @@ canvas.onDispose {
 				block_kotlin.classList.add("invisible");
 
 				putCode(code_java, "java", java_example
-					.replace("$module", isLWJGL? "LWJGL_MODULE" : "JOGL_MODULE")
+					.replaceAll("$module", isLWJGL? "LWJGL_MODULE" : "JOGL_MODULE")
 					.replaceAll("$getter", isLWJGL? "" : "GL2 gl = ((JOGLFXCanvas) canvas).getGl();\n")
 					);
 			}
@@ -183,6 +223,10 @@ Tool to create proper OpenGLFX configuration
 			<input name="build-engine" type="radio" id="radio_maven" onclick="updateCode()">
 			<label for="radio_maven">Maven</label>
 		</div>
+		<div>
+			<input name="build-engine" type="radio" id="radio_sbt" onclick="updateCode()">
+			<label for="radio_sbt">Sbt</label>
+		</div>
 	</div>
 	<div class="config">
 		<div class="title">Language</div>
@@ -207,6 +251,12 @@ Tool to create proper OpenGLFX configuration
 	<h2>Maven</h2>
 	<div id="maven-code"></div>
 	<div id="maven-code2"></div>
+</div>
+
+<div id="sbt-block" class="invisible">
+	<h2>Sbt</h2>
+	<div id="sbt-code"></div>
+	<div id="sbt-code2"></div>
 </div>
 
 <div id="kotlin-block" class="invisible">
