@@ -1,27 +1,36 @@
 <script>
+
 	function hasNavigation() { return false; }
 	function getTitle() { return "Posts"; }
 
 	function onPageLoad(){
-		setTimeout(function() {
-			var last = getLastLoadedPage();
-			var current = last;
-			var lastPost = addPage(current, getPageContent(current));
+		if(localStorage.lastCachedPage !== undefined)
+			doAllStuff(localStorage.lastCachedPage);
+		
+		binaryPageSearch(0, 1024, last => {
+			if(localStorage.lastCachedPage != last)
+				doAllStuff(last);
+			localStorage.lastCachedPage = last;
+		})
+	}
 
-			findById("total").innerHTML = `Smart thoughts: ${last}`;
+	function doAllStuff(last){
+		var current = last;
+		var lastPost = addPage(current, getPageContent(current));
 
-			function checkLastPost(){
-				while(current != 1 && isInViewport(lastPost)){
-					current--;
-					lastPost = addPage(current, getPageContent(current));
-				}
+		findById("total").innerHTML = `Smart thoughts: ${last}`;
+
+		function checkLastPost(){
+			while(current != 1 && isInViewport(lastPost)){
+				current--;
+				lastPost = addPage(current, getPageContent(current));
 			}
+		}
 
-			window.addEventListener('scroll', function(e) {
-				checkLastPost();
-			});
+		window.addEventListener('scroll', function(e) {
 			checkLastPost();
-		}, 10);
+		});
+		checkLastPost();
 	}
 
 	function getPageContent(i){
@@ -31,18 +40,18 @@
         return rawFile.responseText;
 	}
 
-	function getLastLoadedPage(){
-		var from = 0;
-		var to = 4096;
-		while(from != to-1){
-			var middle = parseInt((from + to) / 2);
-			var exist = doesFileExist(`/pages/posts/${middle}.md`);
-			if(exist)
-				from = middle;
-			else
-				to = middle;
+	function binaryPageSearch(from, to, callback){
+		if(from == to - 1){
+			callback(from);
+			return;
 		}
-		return from;
+		var middle = parseInt((from + to) / 2);
+		doesFileExistAsync(`/pages/posts/${middle}.md`, exist => {
+			if(exist)
+				binaryPageSearch(middle, to, callback);
+			else
+				binaryPageSearch(from, middle, callback);
+		});
 	}
 
 	function addPage(i, text){
@@ -153,6 +162,5 @@ ${content} ...
 		<a id="total">Smart thoughts: --</a>
 	</div>
 </div>
-
 
 <div id="pages-list"></div>
