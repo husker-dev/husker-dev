@@ -151,6 +151,7 @@
 		width: 196pt !important;
 		border-radius: 5px; 
 		font-size: 15pt;
+		border-left: 7px solid;
 
 		display: flex;
     	align-items: center;
@@ -171,6 +172,12 @@
 	.language a {
 		margin-left: 20pt;
 		color: var(--color-text-1);
+	}
+
+	#timeline {
+		margin-top: 15pt;
+		border-radius: 7px;
+		background: none;
 	}
 </style>
 
@@ -253,52 +260,54 @@ Hi, my name is Nikita, and I am a programmer (what a surprise). I am from a smal
 
 # Languages
 <div class="table3">
-	<div class="language">
+	<div class="language" style="border-color: #8a3cff;">
 		<img src="resources/languages/kotlin.png"/>
 		<a>Kotlin</a>
 	</div>
-	<div class="language">
+	<div class="language" style="border-color: #e07018;">
 		<img src="resources/languages/java.png"/>
 		<a>Java</a>
 	</div>
-	<div class="language">
+	<div class="language" style="border-color: #00baca;">
 		<img src="resources/languages/cs.png"/>
 		<a>C#</a>
 	</div>
-	<div class="language">
+	<div class="language" style="border-color: #0081ca;">
 		<img src="resources/languages/cpp.png"/>
 		<a>C++</a>
 	</div>
-	<div class="language">
+	<div class="language" style="border-color: #54be00;">
 		<img src="resources/languages/python.png"/>
 		<a>Python</a>
 	</div>
-	<div class="language">
-		<img src="resources/languages/groovy.png"/>
-		<a>Groovy</a>
-	</div>
-	<div class="language">
-		<img src="resources/languages/pascal.png"/>
-		<a>Pascal</a>
-	</div>
-	<div class="language">
-		<img src="resources/languages/html.png"/>
-		<a>Html</a>
-	</div>
-	<div class="language">
-		<img src="resources/languages/javascript.png"/>
-		<a>Java Script</a>
-	</div>
-	<div class="language">
+	<div class="language" style="border-color: #ca8900;">
 		<img src="resources/languages/arduino.png"/>
 		<a>Arduino</a>
 	</div>
-	<div class="language">
+	<div class="language" style="border-color: #ca3900;">
+		<img src="resources/languages/javascript.png"/>
+		<a>Java Script</a>
+	</div>
+	<div class="language" style="border-color: #587934;">
+		<img src="resources/languages/groovy.png"/>
+		<a>Groovy</a>
+	</div>
+	<div class="language" style="border-color: #0091ca;">
 		<img src="resources/languages/php.png"/>
 		<a>PHP</a>
 	</div>
-	<div class="language">
+	<div class="language" style="border-color: transparent;">
+		<img src="resources/languages/html.png"/>
+		<a>Html</a>
+	</div>
+	<div class="language" style="border-color: transparent;">
+		<img src="resources/languages/pascal.png"/>
+		<a>Pascal</a>
+	</div>
+	<div class="language" style="border-color: transparent;">
 		<img src="resources/languages/brainfuck.png"/>
 		<a>Brainfuck</a>
 	</div>
 </div>
+
+<img id="timeline" src="resources/profile/timeline.png">
