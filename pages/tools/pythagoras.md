@@ -3,19 +3,22 @@
 		border-radius: 5pt;
 	}
 	.main-pane {
-		display: flex;
+		display: inline-flex;
 		gap: 30px;
 		flex-direction: column;
     	align-items: center;
+    	width: 100%;
 	}
 	.main-pane > img {
-		width: 300pt;
+		width: 100%;
+		max-width: 300pt;
 	}
 	.main-pane > div {
 		display: flex;
 		gap: 10px;
 		flex-direction: column;
-		min-width: 300pt;
+		width: 100%;
+		max-width: 300pt;
 	}
 	.field {
 		display: flex;
