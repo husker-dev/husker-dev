@@ -39,7 +39,8 @@
 </repositories>`
 
 	var maven_dependency = 
-`<dependency>
+`<!-- OpenGLFX -->
+<dependency>
     <groupId>com.github.husker-dev.openglfx</groupId>
     <artifactId>core</artifactId>
     <version>$version</version>
@@ -48,50 +49,61 @@
     <groupId>com.github.husker-dev.openglfx</groupId>
     <artifactId>$module</artifactId>
     <version>$version</version>
+</dependency>
+
+<!-- Kotlin lib -->
+<dependency>
+    <groupId>org.jetbrains.kotlin</groupId>
+    <artifactId>kotlin-stdlib-jdk8</artifactId>
+    <version>RELEASE</version>
 </dependency>`
 
 	var gradle_repositories = 
 `repositories {
-    // ...
+    mavenCentral()
     maven { url 'https://jitpack.io' }
 }`
 	var gradle_dependency = 
 `dependencies {
-    // ...
+    // OpenGLFX
     implementation 'com.github.husker-dev.openglfx:core:$version'
     implementation 'com.github.husker-dev.openglfx:$module:$version'
+
+    // Kotlin lib
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
 }`
 
 	var sbt_repositories = 
 `resolvers += "jitpack" at "https://jitpack.io"`
 	
 	var sbt_dependency = 
-`libraryDependencies += "com.github.husker-dev.openglfx" % "core" % "$version"
-libraryDependencies += "com.github.husker-dev.openglfx" % "$module" % "$version"`
+`// OpenGLFX
+libraryDependencies += "com.github.husker-dev.openglfx" % "core" % "$version"
+libraryDependencies += "com.github.husker-dev.openglfx" % "$module" % "$version"
+
+// Kotlin lib
+libraryDependencies += "org.jetbrains.kotlin" % "kotlin-stdlib-jdk8" % "RELEASE"`
 
 	var java_example = 
 `OpenGLCanvas canvas = OpenGLCanvas.create($module);
-canvas.createTimer(60);
+canvas.setAnimator(new GLCanvasAnimator(60.0));
 
-canvas.onInitialize(() -> {
+canvas.addOnInitializeEvent((event) -> {
     $getter
 });
-canvas.onReshape(() -> {
+canvas.addOnReshapeEvent((event) -> {
     $getter
 });
-canvas.onRender(() -> {
+canvas.addOnRenderEvent((event) -> {
     $getter
 });
-canvas.onUpdate(() -> {
-
-});
-canvas.onDispose(() -> {
-
+canvas.addOnDisposeEvent((event) -> {
+	$getter
 });`
 
 	var kotlin_example =
 `val canvas = OpenGLCanvas.create($module)
-canvas.createTimer(60.0)
+canvas.animator = GLCanvasAnimator(60.0);
 
 canvas.onInitialize { 
     $getter
@@ -102,11 +114,8 @@ canvas.onReshape {
 canvas.onRender { 
     $getter
 }
-canvas.onUpdate {
-    
-}
 canvas.onDispose {
-    
+    $getter
 }`
 
 	function updateCode(radio){
@@ -180,7 +189,7 @@ canvas.onDispose {
 
 				putCode(code_kotlin, "kotlin", kotlin_example
 					.replace("$module", isLWJGL? "LWJGL_MODULE" : "JOGL_MODULE")
-					.replaceAll("$getter", isLWJGL? "" : "val gl = (canvas as JOGLFXCanvas).gl\n")
+					.replaceAll("$getter", isLWJGL? "" : "val gl = (canvas as JOGLEvent).gl\n")
 					);
 			}else{
 				block_java.classList.remove("invisible");
@@ -188,7 +197,7 @@ canvas.onDispose {
 
 				putCode(code_java, "java", java_example
 					.replaceAll("$module", isLWJGL? "LWJGL_MODULE" : "JOGL_MODULE")
-					.replaceAll("$getter", isLWJGL? "" : "GL2 gl = ((JOGLFXCanvas) canvas).getGl();\n")
+					.replaceAll("$getter", isLWJGL? "" : "GL2 gl = ((JOGLEvent) event).getGl();\n")
 					);
 			}
 		}
