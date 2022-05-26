@@ -196,7 +196,7 @@ canvas.onDispose {
 				block_kotlin.classList.add("invisible");
 
 				putCode(code_java, "java", java_example
-					.replaceAll("$module", isLWJGL? "LWJGL_MODULE" : "JOGL_MODULE")
+					.replaceAll("$module", isLWJGL? "LWJGLExecutor.LWJGL_MODULE" : "JOGLExecutor.JOGL_MODULE")
 					.replaceAll("$getter", isLWJGL? "" : "GL2 gl = ((JOGLEvent) event).getGl();\n")
 					);
 			}
