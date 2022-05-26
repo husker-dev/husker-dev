@@ -105,16 +105,16 @@ canvas.addOnDisposeEvent((event) -> {
 `val canvas = OpenGLCanvas.create($module)
 canvas.animator = GLCanvasAnimator(60.0);
 
-canvas.onInitialize { 
+canvas.addOnInitializeEvent { 
     $getter
 }
-canvas.onReshape { 
+canvas.addOnReshapeEvent { 
     $getter
 }
-canvas.onRender { 
+canvas.addOnRenderEvent { 
     $getter
 }
-canvas.onDispose {
+canvas.addOnDisposeEvent {
     $getter
 }`
 
