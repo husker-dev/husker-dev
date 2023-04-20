@@ -149,7 +149,7 @@
 
 		function loadPage(pagePath){
 			var rawFile = new XMLHttpRequest();
-		    rawFile.open("GET", `${window.location.origin}/pages/${pagePath}.md`, true);
+		    rawFile.open("GET", `${window.location.host + window.location.pathname}/pages/${pagePath}.md`, true);
 		    rawFile.onreadystatechange = function () {
 		    	if(rawFile.readyState === 4){
 			        if(rawFile.status === 200 || rawFile.status == 0){
