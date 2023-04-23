@@ -111,13 +111,9 @@ music-player {
 }
 
 #player_information {
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
-
 	padding-left: 8pt;
 	cursor: pointer;
-	width: 100%;
+	width: calc(100% - 48pt);
 }
 
 #player_volume {
@@ -186,10 +182,20 @@ music-player {
 #player_title {
 	padding-top: 5pt;
 	font-weight: 600;
+
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+
 }
 
 #player_singer {
 	font-weight: 200;
+
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+
 }
 
 #player_progress {
