@@ -1,210 +1,193 @@
-var player_currently_playing = 0;
-var audio_currently_playing = 0;
-var audio_volume = 0.5;
+var current_player = 0;
+var global_audio_volume = 0.5;
+var playlists = new Object();
 
-var player_svg_bars = `
-<svg id="player_play_anim" width="135" height="140" viewBox="0 0 135 140" xmlns="http://www.w3.org/2000/svg" fill="#f0f0f0">
-    <rect y="10" width="15" height="120" rx="6">
-        <animate attributeName="height"
-             begin="0.5s" dur="1s"
-             values="120;110;100;90;80;70;60;50;40;140;120" calcMode="linear"
-             repeatCount="indefinite" />
-        <animate attributeName="y"
-             begin="0.5s" dur="1s"
-             values="10;15;20;25;30;35;40;45;50;0;10" calcMode="linear"
-             repeatCount="indefinite" />
-    </rect>
-    <rect x="30" y="10" width="15" height="120" rx="6">
-        <animate attributeName="height"
-             begin="0.25s" dur="1s"
-             values="120;110;100;90;80;70;60;50;40;140;120" calcMode="linear"
-             repeatCount="indefinite" />
-        <animate attributeName="y"
-             begin="0.25s" dur="1s"
-             values="10;15;20;25;30;35;40;45;50;0;10" calcMode="linear"
-             repeatCount="indefinite" />
-    </rect>
-    <rect x="60" width="15" height="140" rx="6">
-        <animate attributeName="height"
-             begin="0s" dur="1s"
-             values="120;110;100;90;80;70;60;50;40;140;120" calcMode="linear"
-             repeatCount="indefinite" />
-        <animate attributeName="y"
-             begin="0s" dur="1s"
-             values="10;15;20;25;30;35;40;45;50;0;10" calcMode="linear"
-             repeatCount="indefinite" />
-    </rect>
-    <rect x="90" y="10" width="15" height="120" rx="6">
-        <animate attributeName="height"
-             begin="0.25s" dur="1s"
-             values="120;110;100;90;80;70;60;50;40;140;120" calcMode="linear"
-             repeatCount="indefinite" />
-        <animate attributeName="y"
-             begin="0.25s" dur="1s"
-             values="10;15;20;25;30;35;40;45;50;0;10" calcMode="linear"
-             repeatCount="indefinite" />
-    </rect>
-    <rect x="120" y="10" width="15" height="120" rx="6">
-        <animate attributeName="height"
-             begin="0.5s" dur="1s"
-             values="120;110;100;90;80;70;60;50;40;140;120" calcMode="linear"
-             repeatCount="indefinite" />
-        <animate attributeName="y"
-             begin="0.5s" dur="1s"
-             values="10;15;20;25;30;35;40;45;50;0;10" calcMode="linear"
-             repeatCount="indefinite" />
-    </rect>
-</svg>
-`;
 
 function isDesktop() {
 	return !navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
 };
 
+
+function loadSVG(name) {
+	var request = new XMLHttpRequest();
+	request.open('GET', `music_player/${name}.svg`);
+	request.send(null);
+	request.onreadystatechange = function() {
+		if(request.readyState === 4 && request.status === 200) {
+			var oldElement = document.getElementById(`svg-${name}`);
+			var newElement = document.createElement('template');
+			newElement.innerHTML = request.responseText.trim();
+
+			oldElement.parentNode.replaceChild(newElement.content.firstChild, oldElement);
+		}
+	}
+	return `<template id="svg-${name}"></template>`
+};
+
+function bindSliderFunc(box, slider, isOnMouseRelease, action, condition){
+	slider.isMouseDown = false;
+
+	function getPercent(e) { 
+		var hitbox = slider.getBoundingClientRect();
+		var percent = (e.x - hitbox.x) / hitbox.width;
+		return Math.min(Math.max(percent, 0), 1);
+	}
+
+	box.onmousedown = (e) => {
+		if(!condition())
+			return;
+
+		if(e.preventDefault) e.preventDefault();
+		var percent = getPercent(e);
+		if(!isOnMouseRelease)
+			action(percent);
+		slider.style.setProperty("--progress", percent * 100 + "%");
+
+		slider.classList.add("changing");
+		slider.isMouseDown = true;
+	}
+	document.addEventListener("mouseup", (event) => {
+		if(slider.isMouseDown && isOnMouseRelease)
+			action(getPercent(event));
+		
+		slider.classList.remove("changing");
+		slider.isMouseDown = false;
+	});
+	document.addEventListener("mousemove", (e) => {
+		if(slider.isMouseDown){
+			if(e.preventDefault) e.preventDefault();
+			var percent = getPercent(e);
+			
+			if(!isOnMouseRelease)
+				action(percent);
+			slider.style.setProperty("--progress", percent * 100 + "%"); 
+		}
+	});
+}
+
+
 class MusicPlayer extends HTMLElement {
 
-	audio = 0;
-
-	constructor(){
-		super();
+	connectedCallback() {
 		let src = this.getAttribute('src');
 		let title = this.getAttribute('name');
 		let image = this.hasAttribute('image') ? this.getAttribute('image') : src.replace('.mp3', '.jpg');
 		let singer = this.getAttribute('singer');
+		
+		var playlistName = this.hasAttribute('playlist') ? this.getAttribute('playlist') : "__empty";
+		if(!playlists[playlistName])
+			playlists[playlistName] = [];
+		var playlist = playlists[playlistName];
+		var playlistIndex = playlist.length;
+		playlist.push(this);
 
 		this.innerHTML = `
-			<div id="player_image_container">
-				<img id="player_logo" src="${image}" class="noselect" onerror="this.onerror=null;this.src='music_player/empty.png';"/>
-				<div id="player_logo_dark"></div>
-				<i id="player_play_button" class="fas fa-play noselect"></i>
-				${player_svg_bars}
+			<div id="player_image_container" class="noselect">
+				<img id="player_image" src="${image}" class="noselect" onerror="this.onerror=null;this.src='music_player/empty.png';"/>
+				<div id="player_image_darkfilter"></div>
+				<div id="player_icon_play" class="player_icon noselect">
+					${loadSVG("play")}
+				</div>
+				<div id="player_icon_pause" class="player_icon noselect">
+					${loadSVG("pause")}
+				</div>
+				<div id="player_icon_playing" class="player_icon noselect">
+					${loadSVG("waves")}
+				</div>
 			</div>
-			<div id="player_information_container">
+			<div id="player_body">
 				<div id="player_head">
-					<div id="player_information">
+					<div id="player_titles">
 						<div id="player_title">${title}</div>
 						<div id="player_singer">${singer}</div>
 					</div>
 					<div id="player_volume" class="noselect" ${isDesktop()? ``: `style="opacity: 0"`}>
-						<i class="fas fa-volume-up"></i>
-						<div id="player_volume_bar">
-							<div id="player_volume_full"></div>
-							<div id="player_volume_current"></div>
+						<div id="player_volume_bar_container">
+							<div id="player_volume_bar" class="player_slider"></div>
+						</div>
+						<div id="player_volume_icon">
+							${loadSVG("sound")}
 						</div>
 					</div>
 				</div>
-				<div id="player_progress">
-					<div id="player_progress_bar">
-						<div id="player_progress_full"></div>
-						<div id="player_progress_current"></div>
-						<i id="player_progress_slider" class="fas fa-circle"></i>
+				<div id="player_bottom">
+					<div id="player_progress_bar_container">
+						<div id="player_progress_bar" class="player_slider"></div>
 					</div>
 					<div id="player_progress_duration" class="noselect">0:00</div>
 				</div>
 			</div>
 		`;
-		const instance = this;
-
+		
 		var isPlaying = false;
-		var isMouseDown = false;
-		var isVolumeMouseDown = false;
+		var player = this;
 
 		const duration = this.querySelector("#player_progress_duration");
-		const audio = new Audio(src);
-		this.audio = audio;
-		const play_button = this.querySelector("#player_play_button");
-		const player_information = this.querySelector("#player_information");
-		const progress = this.querySelector("#player_progress");
-		const progress_full = this.querySelector("#player_progress_full");
-		const progress_current = this.querySelector("#player_progress_current");
-		const progress_slider = this.querySelector("#player_progress_slider");
-
-		const volume = this.querySelector("#player_volume");
+		const progress_bar = this.querySelector("#player_progress_bar");
 		const volume_bar = this.querySelector("#player_volume_bar");
-		const volume_current = this.querySelector("#player_volume_current");
 
+		var audio = new Audio(src);
+		this.audio = audio;
 		audio.preload = 'metadata';
-		audio.onloadeddata = updateTime;
-		audio.onloadedmetadata = updateTime;
+		audio.onloadeddata = updateTimerLabel;
+		audio.onloadedmetadata = updateTimerLabel;
 		audio.ontimeupdate = (event) => {
-			var percent = audio.currentTime / audio.duration * 100;
-			progress_current.style.width = `${percent}%`;
-			progress_slider.style.left = `${percent}%`;
-			updateTime();
+			var percent = audio.currentTime / audio.duration;
+			if(!progress_bar.classList.contains("changing"))
+				progress_bar.style.setProperty("--progress", percent * 100 + "%")
+			updateTimerLabel();
 		}
-		audio.onplaying = function() {
-	  		isPlaying = true;
-	  		updatePlaying();
+		audio.onplaying = () => {
+			if(current_player.audio != audio){
+				if(current_player.audio){
+					current_player.audio.pause();
+					current_player.audio.currentTime = 0;
+					current_player.classList.remove("player_selected");
+				}
+				current_player = player;
+				current_player.classList.add("player_selected");
+			}
+			isPlaying = true;
+			
+			audio.volume = global_audio_volume;
+			volume_bar.style.setProperty("--progress", global_audio_volume * 100 + "%");
+
+	  		player.classList.add("player_playing");
+			player.classList.remove("player_paused");
+			updateTimerLabel();
 		};
-		audio.onpause = function() {
+		audio.onpause = () => {
 	  		isPlaying = false;
-	  		updatePlaying();
+	  		player.classList.remove("player_playing");
+			player.classList.add("player_paused");
+			updateTimerLabel();
+			
+			if(audio.currentTime == audio.duration){
+				setProgress(0);
+				nextSong();
+			}
 		};
 		audio.src = src;
 
-		// Progress
-		progress.onmousedown = (event) => {
-			if(!isPlaying)
-				return;
-			var hitbox = progress_full.getBoundingClientRect();
+		
+		player.classList.add(isDesktop() ? "desktop": "mobile");
+		player.classList.add("player_paused");
 
-			setProgress((event.x - hitbox.x) / hitbox.width);
-			isMouseDown = true;
-		}
-		document.addEventListener("mouseup", (event) => {
-			isMouseDown = false;
-		});
-		document.addEventListener("mousemove", (event) => {
-			if(isMouseDown){
-				var hitbox = progress_full.getBoundingClientRect();
-				setProgress((event.x - hitbox.x) / hitbox.width);
-			}
-		});
+		bindSliderFunc(this.querySelector("#player_volume_bar_container"), volume_bar, false, setVolume,
+			() => player.classList.contains("player_selected")
+		);
+		bindSliderFunc(this.querySelector("#player_progress_bar_container"), progress_bar, true, setProgress,
+			() => player.classList.contains("player_selected")
+		);
 
-		// Volume
-		volume.onmouseenter = (event) => {
-			setVolume(audio_volume);
-		}
-		volume_bar.onmousedown = (event) => {
-			var hitbox = volume_bar.getBoundingClientRect();
-			setVolume((event.x - hitbox.x) / hitbox.width);
-			isVolumeMouseDown = true;
-		}
-		document.addEventListener("mouseup", (event) => {
-			isVolumeMouseDown = false;
-		});
-		document.addEventListener("mousemove", (event) => {
-			if(isVolumeMouseDown){
-				var hitbox = volume_bar.getBoundingClientRect();
-				setVolume((event.x - hitbox.x) / hitbox.width);
-			}
-		});
+		bindControlFunctionality(this.querySelector("#player_image_container"));
+		bindControlFunctionality(this.querySelector("#player_titles"));
+		
 
 		// Functions
 		function setVolume(percent){
-			if(percent > 1)
-				percent = 1;
-			if(percent < 0)
-				percent = 0;
-			audio_volume = percent;
+			global_audio_volume = percent;
 			audio.volume = percent;
-			if(percent != 0)
-				volume_current.style.width = `${percent * 100}%`;
-			
-		}
-
-		function togglePlay(){
-			if(audio_currently_playing && audio_currently_playing !== audio){
-				audio_currently_playing.pause();
-				player_currently_playing.classList.remove("player_selected");
-			}
-			audio_currently_playing = audio;
-			player_currently_playing = instance;
-			player_currently_playing.classList.add("player_selected");
-
-			audio.volume = audio_volume;
-			if(isPlaying) audio.pause();
-			else audio.play();
 		}
 
 		function setProgress(percent){
@@ -212,46 +195,40 @@ class MusicPlayer extends HTMLElement {
 				audio.currentTime = Math.floor(audio.duration * percent);
 		}
 
-		function updateTime(){
+		function updateTimerLabel(){
 			if(!audio.duration)
 				return;
-			var time = audio.duration;
-			if(isPlaying)
-				time = audio.currentTime;
+			var time = isPlaying ? audio.currentTime : audio.duration;
 			var minutes = parseInt(time / 60);
 			var seconds = parseInt(time % 60);
-			if(seconds < 0)
-				setProgress(0);
 			duration.innerHTML = `${minutes}:${seconds < 10 ? ('0'+seconds) : seconds}`;
 		}
 
-		function updatePlaying(){
-			if(isPlaying){
-				instance.classList.add("player_playing");
-				play_button.classList.remove("fa-play");
-				play_button.classList.add("fa-pause");
-			}else{
-				instance.classList.remove("player_playing");
-				play_button.classList.add("fa-play");
-				play_button.classList.remove("fa-pause");
-			}
-			updateTime();
+		function bindControlFunctionality(element){
+			element.style.cursor = "pointer";
+			element.addEventListener("mouseenter", () => {
+				player.classList.add("player_hover");
+			});
+			element.addEventListener("mouseleave", () => {
+				player.classList.remove("player_hover");
+			});
+			element.addEventListener("click", () => {
+				if(isPlaying) audio.pause();
+				else audio.play();
+			});
 		}
-
-		function setClickable(element){
-			element.addEventListener("mouseenter", function(){
-				instance.classList.add("player_hover");
-			});
-			element.addEventListener("mouseleave", function(){
-				instance.classList.remove("player_hover");
-			});
-			element.addEventListener("click", function(){
-				togglePlay();
+		function bindVolumeControlFunctionality(element){
+			//element.style.cursor = "pointer";
+			element.addEventListener("click", () => {
+				
 			});
 		}
 
-		setClickable(play_button);
-		setClickable(player_information);
+		function nextSong(){
+			if(playlistName != "__empty" && playlistIndex < playlist.length - 1)
+				playlist[playlistIndex + 1].audio.play();
+			
+		}
 	}
 
 	disconnectedCallback() {
