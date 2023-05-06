@@ -294,7 +294,7 @@ music-player.player_playing {
 #player_bottom {
 	display: flex;
 	flex: 1;
-	align-items: end;
+	align-items: flex-end;
 	padding: 0 8pt 0 8pt;
 }
 
