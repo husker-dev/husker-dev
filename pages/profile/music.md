@@ -67,7 +67,7 @@
 				
 }
 
-artist. .aspect-ratio:before {
+artist. .aspect-ratio::before {
 	content: "";
 	display: block;
 	padding-top: 100%;
@@ -95,6 +95,10 @@ artist. .aspect-ratio:before {
 	font-size: 34pt !important;
 	margin-bottom: 0pt !important;
 	margin-top: 0pt !important;
+
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 .artist #samples {
