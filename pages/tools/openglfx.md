@@ -30,24 +30,16 @@
 		})
 	}
 
-	var maven_repositories = 
-`<repositories>
-	<repository>
-        <id>jitpack.io</id>
-        <url>https://jitpack.io</url>
-    </repository>
-</repositories>`
-
 	var maven_dependency = 
 `<!-- OpenGLFX -->
 <dependency>
-    <groupId>com.github.husker-dev.openglfx</groupId>
-    <artifactId>core</artifactId>
+    <groupId>com.huskerdev</groupId>
+    <artifactId>openglfx</artifactId>
     <version>$version</version>
 </dependency>
 <dependency>
-    <groupId>com.github.husker-dev.openglfx</groupId>
-    <artifactId>$module</artifactId>
+    <groupId>com.huskerdev</groupId>
+    <artifactId>openglfx-$module</artifactId>
     <version>$version</version>
 </dependency>
 
@@ -58,28 +50,20 @@
     <version>RELEASE</version>
 </dependency>`
 
-	var gradle_repositories = 
-`repositories {
-    mavenCentral()
-    maven { url 'https://jitpack.io' }
-}`
 	var gradle_dependency = 
 `dependencies {
     // OpenGLFX
-    implementation 'com.github.husker-dev.openglfx:core:$version'
-    implementation 'com.github.husker-dev.openglfx:$module:$version'
+    implementation 'com.huskerdev:openglfx:$version'
+    implementation 'com.huskerdev:openglfx-$module:$version'
 
     // Kotlin lib
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
 }`
-
-	var sbt_repositories = 
-`resolvers += "jitpack" at "https://jitpack.io"`
 	
 	var sbt_dependency = 
 `// OpenGLFX
-libraryDependencies += "com.github.husker-dev.openglfx" % "core" % "$version"
-libraryDependencies += "com.github.husker-dev.openglfx" % "$module" % "$version"
+libraryDependencies += "com.huskerdev" % "openglfx" % "$version"
+libraryDependencies += "com.huskerdev" % "openglfx-$module" % "$version"
 
 // Kotlin lib
 libraryDependencies += "org.jetbrains.kotlin" % "kotlin-stdlib-jdk8" % "RELEASE"`
@@ -125,17 +109,14 @@ canvas.addOnDisposeEvent {
 		const gradle = findById("radio_gradle");
 		const block_gradle = findById("gradle-block");
 		const code_gradle = block_gradle.querySelector('#groovy-code');
-		const code_gradle2 = block_gradle.querySelector('#groovy-code2');
 
 		const maven = findById("radio_maven");
 		const block_maven = findById("maven-block");
 		const code_maven = block_maven.querySelector('#maven-code');
-		const code_maven2 = block_maven.querySelector('#maven-code2');
 
 		const sbt = findById("radio_sbt");
 		const block_sbt = findById("sbt-block");
 		const code_sbt = block_sbt.querySelector('#sbt-code');
-		const code_sbt2 = block_sbt.querySelector('#sbt-code2');
 
 		const kotlin = findById("radio_kotlin");
 		const block_kotlin = findById("kotlin-block");
@@ -156,8 +137,7 @@ canvas.addOnDisposeEvent {
 				block_maven.classList.add("invisible");
 				block_sbt.classList.add("invisible");
 
-				putCode(code_gradle, "groovy", gradle_repositories);
-				putCode(code_gradle2, "groovy", gradle_dependency
+				putCode(code_gradle, "groovy", gradle_dependency
 					.replaceAll("$module", isLWJGL? "lwjgl" : "jogl")
 					.replaceAll("$version", version)
 				);
@@ -166,8 +146,7 @@ canvas.addOnDisposeEvent {
 				block_maven.classList.remove("invisible");
 				block_sbt.classList.add("invisible");
 
-				putCode(code_maven, "xml", maven_repositories);
-				putCode(code_maven2, "xml", maven_dependency
+				putCode(code_maven, "xml", maven_dependency
 					.replaceAll("$module", isLWJGL? "lwjgl" : "jogl")
 					.replaceAll("$version", version)
 				);
@@ -176,8 +155,7 @@ canvas.addOnDisposeEvent {
 				block_maven.classList.add("invisible");
 				block_sbt.classList.remove("invisible");
 
-				putCode(code_sbt, "scala", sbt_repositories);
-				putCode(code_sbt2, "scala", sbt_dependency
+				putCode(code_sbt, "scala", sbt_dependency
 					.replaceAll("$module", isLWJGL? "lwjgl" : "jogl")
 					.replaceAll("$version", version)
 				);
@@ -253,19 +231,16 @@ Tool to create proper OpenGLFX configuration
 <div id="gradle-block" class="invisible">
 	<h2>Gradle</h2>
 	<div id="groovy-code"></div>
-	<div id="groovy-code2"></div>
 </div>
 
 <div id="maven-block" class="invisible">
 	<h2>Maven</h2>
 	<div id="maven-code"></div>
-	<div id="maven-code2"></div>
 </div>
 
 <div id="sbt-block" class="invisible">
 	<h2>Sbt</h2>
 	<div id="sbt-code"></div>
-	<div id="sbt-code2"></div>
 </div>
 
 <div id="kotlin-block" class="invisible">
