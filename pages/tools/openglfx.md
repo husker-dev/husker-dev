@@ -69,7 +69,7 @@ libraryDependencies += "com.huskerdev" % "openglfx-$module" % "$version"
 libraryDependencies += "org.jetbrains.kotlin" % "kotlin-stdlib-jdk8" % "RELEASE"`
 
 	var java_example = 
-`OpenGLCanvas canvas = OpenGLCanvas.create($module);
+`GLCanvas canvas = GLCanvas.create($module);
 canvas.setAnimator(new GLCanvasAnimator(60.0));
 
 canvas.addOnInitializeEvent((event) -> {
@@ -86,7 +86,7 @@ canvas.addOnDisposeEvent((event) -> {
 });`
 
 	var kotlin_example =
-`val canvas = OpenGLCanvas.create($module)
+`val canvas = GLCanvas.create($module)
 canvas.animator = GLCanvasAnimator(60.0);
 
 canvas.addOnInitializeEvent { 
