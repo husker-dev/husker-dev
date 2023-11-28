@@ -72,16 +72,16 @@ libraryDependencies += "org.jetbrains.kotlin" % "kotlin-stdlib-jdk8" % "RELEASE"
 `GLCanvas canvas = GLCanvas.create($module);
 canvas.setAnimator(new GLCanvasAnimator(60.0));
 
-canvas.addOnInitializeEvent((event) -> {
+canvas.addOnInitializeEvent(event -> {
     $getter
 });
-canvas.addOnReshapeEvent((event) -> {
+canvas.addOnReshapeEvent(event -> {
     $getter
 });
-canvas.addOnRenderEvent((event) -> {
+canvas.addOnRenderEvent(event -> {
     $getter
 });
-canvas.addOnDisposeEvent((event) -> {
+canvas.addOnDisposeEvent(event -> {
 	$getter
 });`
 
@@ -89,16 +89,16 @@ canvas.addOnDisposeEvent((event) -> {
 `val canvas = GLCanvas.create($module)
 canvas.animator = GLCanvasAnimator(60.0);
 
-canvas.addOnInitializeEvent { 
+canvas.addOnInitializeEvent { event ->
     $getter
 }
-canvas.addOnReshapeEvent { 
+canvas.addOnReshapeEvent { event ->
     $getter
 }
-canvas.addOnRenderEvent { 
+canvas.addOnRenderEvent { event ->
     $getter
 }
-canvas.addOnDisposeEvent {
+canvas.addOnDisposeEvent { event ->
     $getter
 }`
 
@@ -167,7 +167,7 @@ canvas.addOnDisposeEvent {
 
 				putCode(code_kotlin, "kotlin", kotlin_example
 					.replace("$module", isLWJGL? "LWJGL_MODULE" : "JOGL_MODULE")
-					.replaceAll("$getter", isLWJGL? "" : "val gl = (canvas as JOGLEvent).gl\n")
+					.replaceAll("$getter", isLWJGL? "" : "val gl = (event as JOGLEvent).gl\n")
 					);
 			}else{
 				block_java.classList.remove("invisible");
