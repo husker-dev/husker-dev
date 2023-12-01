@@ -115,25 +115,25 @@ canvas.addOnDisposeEvent { event ->
 
 		if((lwjgl.checked || jogl.checked) && (gradle.checked || maven.checked || sbt.checked) && (kotlin.checked || java.checked)){
 			const mavenModule = 
-				if(lwjgl.checked) "lwjgl"
-				else if(lwjgl2.checked) "lwjgl2"
-				else if(jogl.checked) "jogl"
-				else if(libgdx.checked) "libgdx"
-				else "null";
+				lwjgl.checked ? "lwjgl" :
+				lwjgl2.checked ? "lwjgl2" :
+				jogl.checked ? "jogl" :
+				libgdx.checked ? "libgdx" :
+				"null";
 
 			const executorClass = 
-				if(lwjgl.checked) "LWJGLExecutor"
-				else if(lwjgl2.checked) "LWJGL2Executor"
-				else if(jogl.checked) "JOGLExecutor"
-				else if(libgdx.checked) "LIBGDXExecutor"
-				else "GLExecutor";
+				lwjgl.checked ? "LWJGLExecutor" :
+				lwjgl2.checked ? "LWJGL2Executor" :
+				jogl.checked ? "JOGLExecutor" :
+				libgdx.checked ? "LIBGDXExecutor" :
+				"GLExecutor";
 
 			const executorModule = 
-				if(lwjgl.checked) "LWJGL_MODULE"
-				else if(lwjgl2.checked) "LWJGL2_MODULE"
-				else if(jogl.checked) "JOGL_MODULE"
-				else if(libgdx.checked) "LIBGDX_MODULE"
-				else "NONE_MODULE";
+				lwjgl.checked ? "LWJGL_MODULE" :
+				lwjgl2.checked ? "LWJGL2_MODULE" :
+				jogl.checked ? "JOGL_MODULE" :
+				libgdx.checked ? "LIBGDX_MODULE" :
+				"NONE_MODULE";
 			
 			const isGradle = gradle.checked;
 			const isMaven = maven.checked;
