@@ -125,7 +125,7 @@ canvas.addOnDisposeEvent { event ->
 				lwjgl.checked ? "LWJGLExecutor" :
 				lwjgl2.checked ? "LWJGL2Executor" :
 				jogl.checked ? "JOGLExecutor" :
-				libgdx.checked ? "LIBGDXExecutor" :
+				libgdx.checked ? "LibGDXExecutor" :
 				"GLExecutor";
 
 			const executorModule = 
