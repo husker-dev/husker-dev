@@ -31,42 +31,27 @@
 	}
 
 	var maven_dependency = 
-`<!-- OpenGLFX -->
-<dependency>
-    <groupId>com.huskerdev</groupId>
-    <artifactId>openglfx</artifactId>
-    <version>$version</version>
-</dependency>
-<dependency>
+`<dependency>
     <groupId>com.huskerdev</groupId>
     <artifactId>openglfx-$module</artifactId>
     <version>$version</version>
-</dependency>
-
-<!-- Kotlin lib -->
-<dependency>
-    <groupId>org.jetbrains.kotlin</groupId>
-    <artifactId>kotlin-stdlib-jdk8</artifactId>
-    <version>RELEASE</version>
 </dependency>`
 
 	var gradle_dependency = 
 `dependencies {
-    // OpenGLFX
-    implementation 'com.huskerdev:openglfx:$version'
-    implementation 'com.huskerdev:openglfx-$module:$version'
+    // implementation JavaFX
+    // implementation $module
+    // ...
 
-    // Kotlin lib
-    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation 'com.huskerdev:openglfx-$module:$version'
 }`
 	
 	var sbt_dependency = 
-`// OpenGLFX
-libraryDependencies += "com.huskerdev" % "openglfx" % "$version"
-libraryDependencies += "com.huskerdev" % "openglfx-$module" % "$version"
+`// libraryDependencies += JavaFX
+// libraryDependencies += $module
+// ...
 
-// Kotlin lib
-libraryDependencies += "org.jetbrains.kotlin" % "kotlin-stdlib-jdk8" % "RELEASE"`
+libraryDependencies += "com.huskerdev" % "openglfx-$module" % "$version"`
 
 	var java_example = 
 `GLCanvas canvas = new GLCanvas($module);
@@ -104,7 +89,9 @@ canvas.addOnDisposeEvent { event ->
 
 	function updateCode(radio){
 		const lwjgl = findById("radio_lwjgl");
+		const lwjgl2 = findById("radio_lwjgl2");
 		const jogl = findById("radio_jogl");
+		const libgdx = findById("radio_libgdx");
 
 		const gradle = findById("radio_gradle");
 		const block_gradle = findById("gradle-block");
@@ -127,7 +114,27 @@ canvas.addOnDisposeEvent { event ->
 		const code_java = block_java.querySelector('#java-code');
 
 		if((lwjgl.checked || jogl.checked) && (gradle.checked || maven.checked || sbt.checked) && (kotlin.checked || java.checked)){
-			const isLWJGL = lwjgl.checked;
+			const mavenModule = 
+				if(lwjgl.checked) "lwjgl"
+				else if(lwjgl2.checked) "lwjgl2"
+				else if(jogl.checked) "jogl"
+				else if(libgdx.checked) "libgdx"
+				else "null";
+
+			const executorClass = 
+				if(lwjgl.checked) "LWJGLExecutor"
+				else if(lwjgl2.checked) "LWJGL2Executor"
+				else if(jogl.checked) "JOGLExecutor"
+				else if(libgdx.checked) "LIBGDXExecutor"
+				else "GLExecutor";
+
+			const executorModule = 
+				if(lwjgl.checked) "LWJGL_MODULE"
+				else if(lwjgl2.checked) "LWJGL2_MODULE"
+				else if(jogl.checked) "JOGL_MODULE"
+				else if(libgdx.checked) "LIBGDX_MODULE"
+				else "NONE_MODULE";
+			
 			const isGradle = gradle.checked;
 			const isMaven = maven.checked;
 			const isKotlin = kotlin.checked;
@@ -138,7 +145,7 @@ canvas.addOnDisposeEvent { event ->
 				block_sbt.classList.add("invisible");
 
 				putCode(code_gradle, "groovy", gradle_dependency
-					.replaceAll("$module", isLWJGL? "lwjgl" : "jogl")
+					.replaceAll("$module", mavenModule)
 					.replaceAll("$version", version)
 				);
 			}else if(isMaven){
@@ -147,7 +154,7 @@ canvas.addOnDisposeEvent { event ->
 				block_sbt.classList.add("invisible");
 
 				putCode(code_maven, "xml", maven_dependency
-					.replaceAll("$module", isLWJGL? "lwjgl" : "jogl")
+					.replaceAll("$module", mavenModule)
 					.replaceAll("$version", version)
 				);
 			}else {
@@ -156,7 +163,7 @@ canvas.addOnDisposeEvent { event ->
 				block_sbt.classList.remove("invisible");
 
 				putCode(code_sbt, "scala", sbt_dependency
-					.replaceAll("$module", isLWJGL? "lwjgl" : "jogl")
+					.replaceAll("$module", mavenModule)
 					.replaceAll("$version", version)
 				);
 			}
@@ -166,17 +173,21 @@ canvas.addOnDisposeEvent { event ->
 				block_java.classList.add("invisible");
 
 				putCode(code_kotlin, "kotlin", kotlin_example
-					.replace("$module", isLWJGL? "LWJGL_MODULE" : "JOGL_MODULE")
-					.replaceAll("$getter", isLWJGL? "" : "val gl = (event as JOGLEvent).gl\n")
-					);
+					.replace("$module", executorModule)
+					.replaceAll(jogl.checked? "$getter" : "", "val gl = (event as JOGLEvent).gl\n")
+					.replaceAll(libgdx.checked? "$getter" : "", "val application = (event as LibGDXEvent).application\n")
+					.replaceAll("$getter", "")
+				);
 			}else{
 				block_java.classList.remove("invisible");
 				block_kotlin.classList.add("invisible");
 
 				putCode(code_java, "java", java_example
-					.replaceAll("$module", isLWJGL? "LWJGLExecutor.LWJGL_MODULE" : "JOGLExecutor.JOGL_MODULE")
-					.replaceAll("$getter", isLWJGL? "" : "GL2 gl = ((JOGLEvent) event).getGl();\n")
-					);
+					.replaceAll("$module", `${executorClass}.${executorModule}`)
+					.replaceAll(jogl.checked? "$getter" : "", "GL2 gl = ((JOGLEvent) event).getGl();\n")
+					.replaceAll(libgdx.checked? "$getter" : "", "Application application = (event as LibGDXEvent).getApplication();\n")
+					.replaceAll("$getter", "")
+				);
 			}
 		}
 	}
@@ -196,8 +207,16 @@ Tool to create proper OpenGLFX configuration
 			<label for="radio_lwjgl">LWJGL</label>
 		</div>
 		<div>
+			<input name="lib" type="radio" id="radio_lwjgl2" onclick="updateCode()">
+			<label for="radio_lwjgl2">LWJGL2</label>
+		</div>
+		<div>
 			<input name="lib" type="radio" id="radio_jogl" onclick="updateCode()">
 			<label for="radio_jogl">JOGL</label>
+		</div>
+		<div>
+			<input name="lib" type="radio" id="radio_libgdx" onclick="updateCode()">
+			<label for="radio_libgdx">LibGDX (beta)</label>
 		</div>
 	</div>
 	<div class="config">
