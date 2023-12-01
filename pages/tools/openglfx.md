@@ -174,8 +174,8 @@ canvas.addOnDisposeEvent { event ->
 
 				putCode(code_kotlin, "kotlin", kotlin_example
 					.replace("$module", executorModule)
-					.replaceAll(jogl.checked? "$getter" : "", "val gl = (event as JOGLEvent).gl\n")
-					.replaceAll(libgdx.checked? "$getter" : "", "val application = (event as LibGDXEvent).application\n")
+					.replaceAll(jogl.checked? "$getter" : null, "val gl = (event as JOGLEvent).gl\n")
+					.replaceAll(libgdx.checked? "$getter" : null, "val application = (event as LibGDXEvent).application\n")
 					.replaceAll("$getter", "")
 				);
 			}else{
@@ -184,8 +184,8 @@ canvas.addOnDisposeEvent { event ->
 
 				putCode(code_java, "java", java_example
 					.replaceAll("$module", `${executorClass}.${executorModule}`)
-					.replaceAll(jogl.checked? "$getter" : "", "GL2 gl = ((JOGLEvent) event).getGl();\n")
-					.replaceAll(libgdx.checked? "$getter" : "", "Application application = (event as LibGDXEvent).getApplication();\n")
+					.replaceAll(jogl.checked? "$getter" : null, "GL2 gl = ((JOGLEvent) event).getGl();\n")
+					.replaceAll(libgdx.checked? "$getter" : null, "Application application = (event as LibGDXEvent).getApplication();\n")
 					.replaceAll("$getter", "")
 				);
 			}
