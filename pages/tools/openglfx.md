@@ -113,7 +113,7 @@ canvas.addOnDisposeEvent { event ->
 		const block_java = findById("java-block");
 		const code_java = block_java.querySelector('#java-code');
 
-		if((lwjgl.checked || jogl.checked) && (gradle.checked || maven.checked || sbt.checked) && (kotlin.checked || java.checked)){
+		if((lwjgl.checked || lwjgl2.checked || jogl.checked || libgdx.checked) && (gradle.checked || maven.checked || sbt.checked) && (kotlin.checked || java.checked)){
 			const mavenModule = 
 				lwjgl.checked ? "lwjgl" :
 				lwjgl2.checked ? "lwjgl2" :
