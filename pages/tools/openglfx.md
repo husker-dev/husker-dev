@@ -33,6 +33,11 @@
 	var maven_dependency = 
 `<dependency>
     <groupId>com.huskerdev</groupId>
+    <artifactId>openglfx</artifactId>
+    <version>$version</version>
+</dependency>
+<dependency>
+    <groupId>com.huskerdev</groupId>
     <artifactId>openglfx-$module</artifactId>
     <version>$version</version>
 </dependency>`
@@ -43,6 +48,7 @@
     // implementation $module
     // ...
 
+    implementation 'com.huskerdev:openglfx:$version'
     implementation 'com.huskerdev:openglfx-$module:$version'
 }`
 	
@@ -51,6 +57,7 @@
 // libraryDependencies += $module
 // ...
 
+libraryDependencies += "com.huskerdev" % "openglfx" % "$version"`
 libraryDependencies += "com.huskerdev" % "openglfx-$module" % "$version"`
 
 	var java_example = 
