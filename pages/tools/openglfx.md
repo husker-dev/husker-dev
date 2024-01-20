@@ -57,7 +57,7 @@
 // libraryDependencies += $module
 // ...
 
-libraryDependencies += "com.huskerdev" % "openglfx" % "$version"`
+libraryDependencies += "com.huskerdev" % "openglfx" % "$version"
 libraryDependencies += "com.huskerdev" % "openglfx-$module" % "$version"`
 
 	var java_example = 
