@@ -119,7 +119,7 @@ canvas.addOnDisposeEvent { event ->
 				lwjgl.checked ? "lwjgl" :
 				lwjgl2.checked ? "lwjgl2" :
 				jogl.checked ? "jogl" :
-				libgdx.checked ? "lwjgl, gdx-backend-lwjgl3, gdx-platform:natives-desktop" :
+				libgdx.checked ? "libgdx" :
 				"null";
 
 			const executorClass = 
