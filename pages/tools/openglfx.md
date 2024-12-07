@@ -119,7 +119,7 @@ canvas.addOnDisposeEvent { event ->
 				lwjgl.checked ? "lwjgl" :
 				lwjgl2.checked ? "lwjgl2" :
 				jogl.checked ? "jogl" :
-				libgdx.checked ? "libgdx" :
+				libgdx.checked ? "lwjgl, gdx-backend-lwjgl3, gdx-platform:natives-desktop" :
 				"null";
 
 			const executorClass = 
@@ -173,7 +173,7 @@ canvas.addOnDisposeEvent { event ->
 				block_kotlin.classList.remove("invisible");
 				block_java.classList.add("invisible");
 
-				if(mavenModule == "libgdx"){
+				if(libgdx.checked){
 					putCode(code_kotlin, "kotlin", kotlin_example_libgdx);
 				} else {
 					putCode(code_kotlin, "kotlin", kotlin_example
@@ -187,7 +187,7 @@ canvas.addOnDisposeEvent { event ->
 				block_java.classList.remove("invisible");
 				block_kotlin.classList.add("invisible");
 
-				if(mavenModule == "libgdx"){
+				if(libgdx.checked){
 					putCode(code_java, "java", java_example_libgdx);
 				} else {
 					putCode(code_java, "java", java_example
