@@ -33,11 +33,6 @@
 	var maven_dependency = 
 `<dependency>
     <groupId>com.huskerdev</groupId>
-    <artifactId>openglfx</artifactId>
-    <version>$version</version>
-</dependency>
-<dependency>
-    <groupId>com.huskerdev</groupId>
     <artifactId>openglfx-$module</artifactId>
     <version>$version</version>
 </dependency>`
@@ -48,7 +43,6 @@
     // implementation $module
     // ...
 
-    implementation 'com.huskerdev:openglfx:$version'
     implementation 'com.huskerdev:openglfx-$module:$version'
 }`
 	
@@ -57,12 +51,10 @@
 // libraryDependencies += $module
 // ...
 
-libraryDependencies += "com.huskerdev" % "openglfx" % "$version"
 libraryDependencies += "com.huskerdev" % "openglfx-$module" % "$version"`
 
 	var java_example = 
 `GLCanvas canvas = new GLCanvas($module);
-canvas.setAnimator(new GLCanvasAnimator(60.0));
 
 canvas.addOnInitializeEvent(event -> {
     $getter
@@ -74,12 +66,11 @@ canvas.addOnRenderEvent(event -> {
     $getter
 });
 canvas.addOnDisposeEvent(event -> {
-	$getter
+    $getter
 });`
 
 	var kotlin_example =
 `val canvas = GLCanvas($module)
-canvas.animator = GLCanvasAnimator(60.0);
 
 canvas.addOnInitializeEvent { event ->
     $getter
@@ -93,6 +84,9 @@ canvas.addOnRenderEvent { event ->
 canvas.addOnDisposeEvent { event ->
     $getter
 }`
+
+	var java_example_libgdx = `LibGDXCanvas canvas = new LibGDXCanvas(new MyApplicationAdapter());`
+	var kotlin_example_libgdx = `val canvas = LibGDXCanvas(MyApplicationAdapter())`
 
 	function updateCode(radio){
 		const lwjgl = findById("radio_lwjgl");
@@ -179,22 +173,30 @@ canvas.addOnDisposeEvent { event ->
 				block_kotlin.classList.remove("invisible");
 				block_java.classList.add("invisible");
 
-				putCode(code_kotlin, "kotlin", kotlin_example
-					.replace("$module", executorModule)
-					.replaceAll(jogl.checked? "$getter" : null, "val gl = (event as JOGLEvent).gl\n")
-					.replaceAll(libgdx.checked? "$getter" : null, "val application = (event as LibGDXEvent).application\n")
-					.replaceAll("$getter", "")
-				);
+				if(mavenModule == "libgdx"){
+					putCode(code_kotlin, "kotlin", kotlin_example_libgdx);
+				} else {
+					putCode(code_kotlin, "kotlin", kotlin_example
+						.replace("$module", executorModule)
+						.replaceAll(jogl.checked? "$getter" : null, "val gl = (event as JOGLEvent).gl\n")
+						.replaceAll(libgdx.checked? "$getter" : null, "val application = (event as LibGDXEvent).application\n")
+						.replaceAll("$getter", "")
+					);
+				}
 			}else{
 				block_java.classList.remove("invisible");
 				block_kotlin.classList.add("invisible");
 
-				putCode(code_java, "java", java_example
-					.replaceAll("$module", `${executorClass}.${executorModule}`)
-					.replaceAll(jogl.checked? "$getter" : null, "GL2 gl = ((JOGLEvent) event).getGl();\n")
-					.replaceAll(libgdx.checked? "$getter" : null, "Application application = (event as LibGDXEvent).getApplication();\n")
-					.replaceAll("$getter", "")
-				);
+				if(mavenModule == "libgdx"){
+					putCode(code_java, "java", java_example_libgdx);
+				} else {
+					putCode(code_java, "java", java_example
+						.replaceAll("$module", `${executorClass}.${executorModule}`)
+						.replaceAll(jogl.checked? "$getter" : null, "GL2 gl = ((JOGLEvent) event).getGl();\n")
+						.replaceAll(libgdx.checked? "$getter" : null, "Application application = (event as LibGDXEvent).getApplication();\n")
+						.replaceAll("$getter", "")
+					);
+				}
 			}
 		}
 	}
