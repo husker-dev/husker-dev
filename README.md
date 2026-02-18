@@ -4,6 +4,8 @@
 
 My name is Nikita Shtengauer, and I'm a frontend/backend Kotlin developer. I work primarily with graphics and GPU technologies.
 
+
+## 🔧 Technologies & Tools
 ![My Skills](https://skillicons.dev/icons?i=kotlin,java,c,gradle,cmake,androidstudio,idea,grafana,kubernetes,docker,prometheus)
 
 
