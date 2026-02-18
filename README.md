@@ -1,27 +1,15 @@
-## Languages
+![logo](https://github.com/user-attachments/assets/8af6f91f-c037-40f9-b610-8b282199da63)
 
-<a href="https://en.wikipedia.org/wiki/Kotlin_(programming_language)"><img title="Kotlin" align="left" height="25" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/kotlin/kotlin.png"></a>
-<a href="https://en.wikipedia.org/wiki/Java_(programming_language)"><img title="Java" align="left" height="25" src="https://cdn.icon-icons.com/icons2/2108/PNG/512/java_icon_130901.png"></a>
-<a href="https://en.wikipedia.org/wiki/C_Sharp_(programming_language)"><img title="C#" align="left" height="25" src="https://seeklogo.com//images/C/c-sharp-c-logo-02F17714BA-seeklogo.com.png"></a>
-<a href="https://en.wikipedia.org/wiki/C%2B%2B"><img title="C++" align="left" height="25" src="https://upload.wikimedia.org/wikipedia/commons/1/18/ISO_C%2B%2B_Logo.svg"></a>
-<a href="https://en.wikipedia.org/wiki/Python_(programming_language)"><img title="Python" align="left" height="25" src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg"></a>
-<a href="https://en.wikipedia.org/wiki/HTML"><img title="HTML" align="left" height="25" src="https://cdn-icons-png.flaticon.com/512/732/732212.png"></a>
-<a href="https://en.wikipedia.org/wiki/JavaScript"><img title="JavaScript" align="left" height="25" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/javascript/javascript.png"></a>
-<a href="https://en.wikipedia.org/wiki/PHP"><img title="PHP" align="left" height="25" src="https://cdn.iconscout.com/icon/free/png-256/php-2038871-1720084.png"></a>
-<a href="https://en.wikipedia.org/wiki/Brainfuck"><img title="Brainfuck" align="left" height="25" src="https://apprecs.org/gp/images/app-icons/300/86/com.sumitgouthaman.brainfuck_android.jpg"></a>
+# Hey There! <img src="https://raw.githubusercontent.com/MartinHeinz/MartinHeinz/master/wave.gif" width="30px" height="30px" />
 
-<br />
+My name is Nikita Shtengauer, and I'm a frontend/backend Kotlin developer. I work primarily with graphics and GPU technologies.
 
-## Tools
+![My Skills](https://skillicons.dev/icons?i=kotlin,java,c,gradle,cmake,androidstudio,idea,grafana,kubernetes,docker,prometheus)
 
-<a href="https://en.wikipedia.org/wiki/IntelliJ_IDEA"><img title="IntelliJ IDEA" align="left" height="25" src="https://upload.wikimedia.org/wikipedia/commons/9/9c/IntelliJ_IDEA_Icon.svg"></a>
-<a href="https://en.wikipedia.org/wiki/JetBrains#IDEs"><img title="CLion" align="left" height="25" src="https://cdn.worldvectorlogo.com/logos/clion-1.svg"></a>
-<a href="https://en.wikipedia.org/wiki/JetBrains#IDEs"><img title="Rider" align="left" height="25" src="https://www.pngfind.com/pngs/b/642-6424738_rider-png.png"></a>
-<a href="https://en.wikipedia.org/wiki/PyCharm"><img title="PyCharm" align="left" height="25" src="https://upload.wikimedia.org/wikipedia/commons/1/1d/PyCharm_Icon.svg"></a>
-<a href="https://en.wikipedia.org/wiki/Microsoft_Visual_Studio"><img title="Visual Studio" align="left" height="25" src="https://upload.wikimedia.org/wikipedia/commons/5/59/Visual_Studio_Icon_2019.svg"></a>
-<a href="https://en.wikipedia.org/wiki/Unix_shell"><img title="Terminal" align="left" height="25" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/terminal/terminal.png"></a>
 
-<br />
-<br />
-  
-### [huskerdev.com](https://huskerdev.com)
+## Contacts
+<p>
+<a href="https://t.me/shtengauer_nikita"><img title="telegram" src="https://img.shields.io/badge/-%40shtengauer__nikita-s?style=flat-square&logo=telegram&logoColor=26A5E4&color=242938"></a>
+<a href="https://vk.com/shtengauer_nikita"><img title="vk" src="https://img.shields.io/badge/-%40shtengauer__nikita-s?style=flat-square&logo=vk&logoColor=0077FF&color=242938"></a>
+<a href="https://www.youtube.com/@huskerdev"><img title="youtube" src="https://img.shields.io/badge/-%40huskerdev-s?style=flat-square&logo=youtube&logoColor=FF0000&color=242938"></a>
+</p>
